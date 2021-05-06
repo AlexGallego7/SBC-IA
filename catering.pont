@@ -1,4 +1,4 @@
-; Thu Apr 15 14:25:21 CEST 2021
+; Thu May 06 20:53:11 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -7,6 +7,10 @@
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
+	(single-slot catering_Class11
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot max_price
 ;+		(comment "Precio máximo del menu")
 		(type INTEGER)
@@ -14,18 +18,12 @@
 		(create-accessor read-write))
 	(single-slot name_
 		(type STRING)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot bebida
 ;+		(comment "Bebida asociada al plato")
 		(type INSTANCE)
 ;+		(allowed-classes Bebida)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot segundo
-;+		(comment "Segundo plato del menu")
-		(type INSTANCE)
-;+		(allowed-classes Segundo)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot postre
@@ -34,15 +32,9 @@
 ;+		(allowed-classes Postre)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot KB_651658_Class19
+	(multislot ingredientes_prohibidos
+;+		(comment "Ingredientes prohibidos")
 		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot bebida_p
-;+		(comment "Bebida asociada al plato")
-		(type INSTANCE)
-;+		(allowed-classes Bebida)
-;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot primero
 ;+		(comment "Primer plato del menu")
@@ -50,20 +42,40 @@
 ;+		(allowed-classes Primero)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot tipo
-;+		(comment "Tipo de evento")
+	(single-slot vegetariano
 		(type SYMBOL)
-		(allowed-values Familiar Congreso)
+		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot price
 ;+		(comment "Precio del plato")
 		(type FLOAT)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot min_price
 ;+		(comment "Precio mínimo del menu")
 		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot ingredientes
+		(type STRING)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(single-slot segundo
+;+		(comment "Segundo plato del menu")
+		(type INSTANCE)
+;+		(allowed-classes Segundo)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot precio_max
+;+		(comment "Precio máximo")
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tipo
+;+		(comment "Tipo de evento")
+		(type SYMBOL)
+		(allowed-values Familiar Congreso)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot epoca
@@ -76,9 +88,19 @@
 ;+		(comment "Numero de comensales que atenderán el evento")
 		(type INTEGER)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot precio_min
+;+		(comment "Precio mínimo")
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot estilo
+		(type SYMBOL)
+		(allowed-values Clasico Moderno Regional Sibarita)
+;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
-(defclass Event "Información sobre el evento"
+(defclass Evento "Información sobre el evento"
 	(is-a USER)
 	(role concrete)
 	(single-slot comensales
@@ -102,43 +124,43 @@
 (defclass Menu "Información sobre el menu"
 	(is-a USER)
 	(role concrete)
-	(single-slot max_price
-;+		(comment "Precio máximo del menu")
-		(type INTEGER)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot primero
-;+		(comment "Primer plato del menu")
+	(single-slot bebida
+;+		(comment "Bebida asociada al plato")
 		(type INSTANCE)
-;+		(allowed-classes Primero)
+;+		(allowed-classes Bebida)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot segundo
 ;+		(comment "Segundo plato del menu")
 		(type INSTANCE)
 ;+		(allowed-classes Segundo)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot primero
+;+		(comment "Primer plato del menu")
+		(type INSTANCE)
+;+		(allowed-classes Primero)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot postre
 ;+		(comment "Postre del menu")
 		(type INSTANCE)
 ;+		(allowed-classes Postre)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot min_price
-;+		(comment "Precio mínimo del menu")
-		(type INTEGER)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Plato "Información sobre el plato"
 	(is-a USER)
 	(role abstract)
+	(multislot ingredientes
+		(type STRING)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
 	(single-slot name_
 		(type STRING)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot bebida_p
+	(single-slot bebida
 ;+		(comment "Bebida asociada al plato")
 		(type INSTANCE)
 ;+		(allowed-classes Bebida)
@@ -147,21 +169,63 @@
 	(single-slot price
 ;+		(comment "Precio del plato")
 		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Primero "Información sobre el primero"
+	(is-a Plato)
+	(role concrete)
+	(single-slot vegetariano
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
-(defclass Primero
+(defclass Segundo "Información sobre el segundo"
 	(is-a Plato)
 	(role concrete))
 
-(defclass Segundo
+(defclass Postre "Información sobre el postre"
 	(is-a Plato)
 	(role concrete))
 
-(defclass Postre
-	(is-a Plato)
-	(role concrete))
-
-(defclass Bebida
+(defclass Bebida "Información sobre la bebida"
 	(is-a USER)
-	(role abstract))
+	(role concrete)
+	(single-slot name_
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot price
+;+		(comment "Precio del plato")
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Restricciones "Información sobre restricciones"
+	(is-a USER)
+	(role concrete)
+	(single-slot precio_min
+;+		(comment "Precio mínimo")
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot estilo
+		(type SYMBOL)
+		(allowed-values Clasico Moderno Regional Sibarita)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot precio_max
+;+		(comment "Precio máximo")
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot vegetariano
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot ingredientes_prohibidos
+;+		(comment "Ingredientes prohibidos")
+		(type STRING)
+		(create-accessor read-write)))
