@@ -1,4 +1,4 @@
-; Sun May 09 21:24:37 CEST 2021
+; Fri May 14 00:11:22 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 660")
@@ -20,10 +20,14 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[catering_ProjectKB_Class10018]
-		[catering_ProjectKB_Class10019]
-		[catering_ProjectKB_Class10020]
-		[catering_ProjectKB_Class10021]))
+		[catering_ProjectKB_Class23640]
+		[catering_ProjectKB_Class23641]
+		[catering_ProjectKB_Class23642]
+		[catering_ProjectKB_Class23643]
+		[catering_ProjectKB_Class23644]
+		[catering_ProjectKB_Class23645]
+		[catering_ProjectKB_Class23646]
+		[catering_ProjectKB_Class23647]))
 
 ([catering_ProjectKB_Class1] of  Widget
 
@@ -34,46 +38,239 @@
 ([catering_ProjectKB_Class10] of  Property_List
 )
 
-([catering_ProjectKB_Class10018] of  String
+([catering_ProjectKB_Class10021] of  Widget
 
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
+	(height 60)
+	(is_hidden FALSE)
+	(name "info_generica")
+	(property_list [catering_ProjectKB_Class10022])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
 
-([catering_ProjectKB_Class10019] of  String
+([catering_ProjectKB_Class10022] of  Property_List
+)
 
-	(name "Evento")
-	(string_value "epoca"))
+([catering_ProjectKB_Class10023] of  Widget
 
-([catering_ProjectKB_Class10020] of  String
+	(height 60)
+	(is_hidden FALSE)
+	(name "precio")
+	(property_list [catering_ProjectKB_Class10024])
+	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
+	(width 100)
+	(x 0)
+	(y 120))
 
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
+([catering_ProjectKB_Class10024] of  Property_List
+)
 
-([catering_ProjectKB_Class10021] of  String
+([catering_ProjectKB_Class10025] of  Widget
 
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
+	(height 60)
+	(is_hidden FALSE)
+	(name "valoracion")
+	(property_list [catering_ProjectKB_Class10026])
+	(widget_class_name "edu.stanford.smi.protege.widget.ComboBoxWidget")
+	(width 100)
+	(x 100)
+	(y 180))
 
-([catering_ProjectKB_Class10022] of  Map_Entry
+([catering_ProjectKB_Class10026] of  Property_List
+)
 
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
+([catering_ProjectKB_Class10027] of  Widget
 
-([catering_ProjectKB_Class10023] of  Map_Entry
+	(height 240)
+	(is_hidden FALSE)
+	(name "ingredientes")
+	(property_list [catering_ProjectKB_Class10028])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 400)
+	(y 0))
 
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
+([catering_ProjectKB_Class10028] of  Property_List
 
-([catering_ProjectKB_Class10024] of  Map_Entry
+	(properties
+		[catering_ProjectKB_Class10029]
+		[catering_ProjectKB_Class10030]))
 
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
+([catering_ProjectKB_Class10029] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([catering_ProjectKB_Class10030] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([catering_ProjectKB_Class10031] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "dieta")
+	(property_list [catering_ProjectKB_Class10032])
+	(widget_class_name "edu.stanford.smi.protege.widget.ComboBoxWidget")
+	(width 100)
+	(x 100)
+	(y 120))
+
+([catering_ProjectKB_Class10032] of  Property_List
+)
+
+([catering_ProjectKB_Class10033] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "combina_bien")
+	(property_list [catering_ProjectKB_Class10034])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 200)
+	(y 120))
+
+([catering_ProjectKB_Class10034] of  Property_List
+
+	(properties
+		[catering_ProjectKB_Class10035]
+		[catering_ProjectKB_Class10036]))
+
+([catering_ProjectKB_Class10035] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([catering_ProjectKB_Class10036] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([catering_ProjectKB_Class10037] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "nombre")
+	(property_list [catering_ProjectKB_Class10038])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([catering_ProjectKB_Class10038] of  Property_List
+)
+
+([catering_ProjectKB_Class10039] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "bebida")
+	(property_list [catering_ProjectKB_Class10040])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 200)
+	(y 0))
+
+([catering_ProjectKB_Class10040] of  Property_List
+
+	(properties
+		[catering_ProjectKB_Class10041]
+		[catering_ProjectKB_Class10042]))
+
+([catering_ProjectKB_Class10041] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([catering_ProjectKB_Class10042] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([catering_ProjectKB_Class10043] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "disponibilidad")
+	(property_list [catering_ProjectKB_Class10044])
+	(widget_class_name "edu.stanford.smi.protege.widget.ComboBoxWidget")
+	(width 100)
+	(x 0)
+	(y 180))
+
+([catering_ProjectKB_Class10044] of  Property_List
+)
+
+([catering_ProjectKB_Class10057] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "dieta")
+	(property_list [catering_ProjectKB_Class10058])
+	(widget_class_name "edu.stanford.smi.protege.widget.ComboBoxWidget")
+	(width 100)
+	(x 100)
+	(y 120))
+
+([catering_ProjectKB_Class10058] of  Property_List
+)
+
+([catering_ProjectKB_Class10104] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "dieta")
+	(property_list [catering_ProjectKB_Class10105])
+	(widget_class_name "edu.stanford.smi.protege.widget.ComboBoxWidget")
+	(width 100)
+	(x 100)
+	(y 120))
+
+([catering_ProjectKB_Class10105] of  Property_List
+)
+
+([catering_ProjectKB_Class10125] of  Widget
+
+	(height 300)
+	(is_hidden FALSE)
+	(name "ingredientes")
+	(property_list [catering_ProjectKB_Class10126])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 200)
+	(y 0))
+
+([catering_ProjectKB_Class10126] of  Property_List
+
+	(properties
+		[catering_ProjectKB_Class10127]
+		[catering_ProjectKB_Class10128]))
+
+([catering_ProjectKB_Class10127] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([catering_ProjectKB_Class10128] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([catering_ProjectKB_Class10139] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "dieta")
+	(property_list [catering_ProjectKB_Class10140])
+	(widget_class_name "edu.stanford.smi.protege.widget.SymbolListWidget")
+	(width 200)
+	(x 0)
+	(y 240))
+
+([catering_ProjectKB_Class10140] of  Property_List
+)
 
 ([catering_ProjectKB_Class10145] of  Widget
 
@@ -177,13 +374,105 @@
 ([catering_ProjectKB_Class20] of  Property_List
 )
 
+([catering_ProjectKB_Class20249] of  Property_List
+)
+
+([catering_ProjectKB_Class20302] of  Property_List
+)
+
+([catering_ProjectKB_Class20359] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "info_generica")
+	(property_list [catering_ProjectKB_Class20360])
+	(widget_class_name "edu.stanford.smi.protege.widget.SymbolListWidget")
+	(width 200)
+	(x 0)
+	(y 360))
+
+([catering_ProjectKB_Class20360] of  Property_List
+)
+
+([catering_ProjectKB_Class20469] of  Property_List
+)
+
+([catering_ProjectKB_Class20522] of  Property_List
+)
+
+([catering_ProjectKB_Class20687] of  Property_List
+)
+
+([catering_ProjectKB_Class20740] of  Property_List
+)
+
+([catering_ProjectKB_Class20905] of  Property_List
+)
+
+([catering_ProjectKB_Class20958] of  Property_List
+)
+
 ([catering_ProjectKB_Class21] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [catering_ProjectKB_Class22])
 	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.KnowledgeTreeTab"))
 
+([catering_ProjectKB_Class21123] of  Property_List
+)
+
+([catering_ProjectKB_Class21176] of  Property_List
+)
+
+([catering_ProjectKB_Class21341] of  Property_List
+)
+
+([catering_ProjectKB_Class21394] of  Property_List
+)
+
+([catering_ProjectKB_Class21559] of  Property_List
+)
+
+([catering_ProjectKB_Class21612] of  Property_List
+)
+
+([catering_ProjectKB_Class21777] of  Property_List
+)
+
+([catering_ProjectKB_Class21830] of  Property_List
+)
+
+([catering_ProjectKB_Class21995] of  Property_List
+)
+
 ([catering_ProjectKB_Class22] of  Property_List
+)
+
+([catering_ProjectKB_Class22048] of  Property_List
+)
+
+([catering_ProjectKB_Class22213] of  Property_List
+)
+
+([catering_ProjectKB_Class22266] of  Property_List
+)
+
+([catering_ProjectKB_Class22431] of  Property_List
+)
+
+([catering_ProjectKB_Class22484] of  Property_List
+)
+
+([catering_ProjectKB_Class22649] of  Property_List
+)
+
+([catering_ProjectKB_Class22702] of  Property_List
+)
+
+([catering_ProjectKB_Class22867] of  Property_List
+)
+
+([catering_ProjectKB_Class22920] of  Property_List
 )
 
 ([catering_ProjectKB_Class23] of  Widget
@@ -191,6 +480,79 @@
 	(is_hidden TRUE)
 	(property_list [catering_ProjectKB_Class24])
 	(widget_class_name "edu.stanford.smi.protege.keywordsearch.StringSearch"))
+
+([catering_ProjectKB_Class23085] of  Property_List
+)
+
+([catering_ProjectKB_Class23138] of  Property_List
+)
+
+([catering_ProjectKB_Class23516] of  Property_List
+)
+
+([catering_ProjectKB_Class23565] of  Property_List
+)
+
+([catering_ProjectKB_Class23640] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([catering_ProjectKB_Class23641] of  String
+
+	(name "Evento")
+	(string_value "epoca"))
+
+([catering_ProjectKB_Class23642] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([catering_ProjectKB_Class23643] of  String
+
+	(name "Principal")
+	(string_value "nombre"))
+
+([catering_ProjectKB_Class23644] of  String
+
+	(name "Postre")
+	(string_value "nombre"))
+
+([catering_ProjectKB_Class23645] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([catering_ProjectKB_Class23646] of  String
+
+	(name "Ingrediente")
+	(string_value "nombre"))
+
+([catering_ProjectKB_Class23647] of  String
+
+	(name "Bebida")
+	(string_value "nombre"))
+
+([catering_ProjectKB_Class23648] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([catering_ProjectKB_Class23649] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([catering_ProjectKB_Class23650] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([catering_ProjectKB_Class24] of  Property_List
 )
@@ -529,10 +891,14 @@
 
 	(properties
 		[catering_ProjectKB_Class93]
-		[catering_ProjectKB_Class94]
-		[catering_ProjectKB_Class96]
-		[catering_ProjectKB_Class102]
-		[catering_ProjectKB_Class10145]))
+		[catering_ProjectKB_Class10023]
+		[catering_ProjectKB_Class10025]
+		[catering_ProjectKB_Class10027]
+		[catering_ProjectKB_Class10033]
+		[catering_ProjectKB_Class10037]
+		[catering_ProjectKB_Class10039]
+		[catering_ProjectKB_Class10043]
+		[catering_ProjectKB_Class20359]))
 
 ([catering_ProjectKB_Class93] of  Property_List
 
@@ -616,9 +982,9 @@
 ([KB_051431_Class1] of  Map
 
 	(entries
-		[catering_ProjectKB_Class10022]
-		[catering_ProjectKB_Class10023]
-		[catering_ProjectKB_Class10024]))
+		[catering_ProjectKB_Class23648]
+		[catering_ProjectKB_Class23649]
+		[catering_ProjectKB_Class23650]))
 
 ([KB_051431_Class124] of  String
 
@@ -712,7 +1078,7 @@
 
 	(properties [catering_ProjectKB_Class126]))
 
-([KB_628373_Class3] of  Map
+([KB_559231_Class3] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List

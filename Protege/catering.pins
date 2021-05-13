@@ -1,4 +1,151 @@
-; Sun May 09 21:24:37 CEST 2021
+; Fri May 14 00:11:22 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 660")
+
+([catering_Class10005] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Cordero"))
+
+([catering_Class10006] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Limón"))
+
+([catering_Class10007] of  Ingrediente
+
+	(disponibilidad Primavera)
+	(nombre "Espárrago"))
+
+([catering_Class10008] of  Ingrediente
+
+	(disponibilidad Verano)
+	(nombre "Pepino"))
+
+([catering_Class10009] of  Ingrediente
+
+	(disponibilidad Verano)
+	(nombre "Melón"))
+
+([catering_Class10010] of  Ingrediente
+
+	(disponibilidad Verano)
+	(nombre "Fresa"))
+
+([catering_Class10011] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Zanahoria"))
+
+([catering_Class10012] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Lechuga"))
+
+([catering_Class10013] of  Ingrediente
+
+	(disponibilidad Oto%C3%B1o)
+	(nombre "Remolacha"))
+
+([catering_Class10014] of  Principal
+
+	(combina_bien [catering_Class2])
+	(disponibilidad Total)
+	(info_generica Vegetariano Vegano)
+	(ingredientes
+		[catering_Class10012]
+		[catering_Class10011]
+		[catering_Class10013])
+	(nombre "Ensalada")
+	(papel Primero)
+	(precio 5.0))
+
+([catering_Class10017] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[catering_Class10020]
+		[catering_Class10018]
+		[catering_Class10019]
+		[catering_Class10022]
+		[catering_Class10021])
+	(nombre "Tarta de chocolate")
+	(precio 2.5))
+
+([catering_Class10018] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Chocolate"))
+
+([catering_Class10019] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Galleta"))
+
+([catering_Class10020] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Azúcar"))
+
+([catering_Class10021] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Mantequilla"))
+
+([catering_Class10022] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Lecha Entera"))
+
+([catering_Class10023] of  Ingrediente
+
+	(disponibilidad Verano)
+	(nombre "Naranja"))
+
+([catering_Class10027] of  Bebida
+
+	(alcoholica TRUE)
+	(combina_bien [catering_Class2])
+	(nombre "Vino Blanco")
+	(precio 3.0))
+
+([catering_Class10028] of  Bebida
+
+	(alcoholica FALSE)
+	(nombre "Fanta")
+	(precio 1.25))
+
+([catering_Class10029] of  Bebida
+
+	(alcoholica TRUE)
+	(nombre "Vino tinto")
+	(precio 3.0))
+
+([catering_Class10030] of  Bebida
+
+	(alcoholica FALSE)
+	(nombre "Coca Cola")
+	(precio 1.25))
+
+([catering_Class2] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Pescado)
+	(ingredientes
+		[catering_Class3]
+		[catering_Class10006]
+		[catering_Class4])
+	(nombre "Salmón ahumado")
+	(papel Ambos)
+	(precio 7.0))
+
+([catering_Class3] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Salmón"))
+
+([catering_Class4] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Sal"))

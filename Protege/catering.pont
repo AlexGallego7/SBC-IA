@@ -1,4 +1,4 @@
-; Sun May 09 21:24:37 CEST 2021
+; Fri May 14 00:11:22 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 660")
@@ -21,11 +21,10 @@
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot bebida
-;+		(comment "Bebida asociada al plato")
+	(multislot bebida
+;+		(comment "Bebida asociada al plato / menú")
 		(type INSTANCE)
 ;+		(allowed-classes Bebida)
-;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot bebidas_acoholicas
 		(type SYMBOL)
@@ -35,7 +34,7 @@
 	(single-slot bebida_por_plato
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot postre
 ;+		(comment "Postre del menu")
@@ -55,20 +54,15 @@
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot valoracion
-;+		(comment "Rating del plato segun el cliente")
-		(type FLOAT)
-		(range 0.0 10.0)
+;+		(comment "Rating del menú/plato para el cliente en concreto")
+		(type SYMBOL)
+		(allowed-values Excelente Bueno Normal Malo P%C3%A9simo)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot dieta
+	(multislot dieta
 		(type SYMBOL)
 		(allowed-values vegana vegetariana)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot vegetariano
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
+		(cardinality 0 2)
 		(create-accessor read-write))
 	(single-slot min_price
 ;+		(comment "Precio mínimo del menu")
@@ -90,16 +84,20 @@
 ;+		(allowed-classes Principal)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot compatibilidad
-;+		(comment "la compatibilidad con los diferentes platos que podemos elaborar")
-		(type FLOAT)
-		(range 0.0 10.0)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(multislot ingredienteserqw
 		(type INSTANCE)
 ;+		(allowed-classes Ingrediente)
 		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(multislot info_generica
+;+		(comment "Información genérica del plato")
+		(type SYMBOL)
+		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterr%C3%A1neo Japon%C3%A9s)
+		(create-accessor read-write))
+	(multislot combina_bien
+;+		(comment "Indica los platos con cuales combina bien.")
+		(type INSTANCE)
+;+		(allowed-classes Plato)
 		(create-accessor read-write))
 	(single-slot persona
 		(type INSTANCE)
@@ -109,10 +107,11 @@
 	(single-slot precio
 ;+		(comment "Precio del plato")
 		(type FLOAT)
+		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot precio_max
-;+		(comment "Precio máximo")
+;+		(comment "Precio máximo del menu")
 		(type FLOAT)
 		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
@@ -124,20 +123,22 @@
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot papel
+;+		(comment "Possible papel en el menú, si es primero o segundo o puede ser ambos")
 		(type SYMBOL)
 		(allowed-values Primero Segundo Ambos)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot disponibilidad
+;+		(comment "Disponibilidad del ingrediente/plato durante el año")
+		(type SYMBOL)
+		(allowed-values Primavera Verano Oto%C3%B1o Invierno Total)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot epoca
 ;+		(comment "Epoca del año en la que se celebra el evento")
 		(type SYMBOL)
 		(allowed-values Primavera Verano Oto%C3%B1o Invierno)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot vegano
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot comensales
 ;+		(comment "Numero de comensales que atenderán el evento")
@@ -167,6 +168,7 @@
 	(multislot menus_ofrecidos
 		(type INSTANCE)
 ;+		(allowed-classes Menu)
+		(cardinality 0 3)
 		(create-accessor read-write))
 	(single-slot catering_Class6
 		(type STRING)
@@ -192,7 +194,7 @@
 ;+		(comment "Epoca del año en la que se celebra el evento")
 		(type SYMBOL)
 		(allowed-values Primavera Verano Oto%C3%B1o Invierno)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Persona "Información sobre restricciones"
@@ -210,15 +212,15 @@
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot precio_max
-;+		(comment "Precio máximo")
+;+		(comment "Precio máximo del menu")
 		(type FLOAT)
 		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot dieta
+	(multislot dieta
 		(type SYMBOL)
 		(allowed-values vegana vegetariana)
-;+		(cardinality 0 1)
+		(cardinality 0 2)
 		(create-accessor read-write))
 	(single-slot bebidas_acoholicas
 		(type SYMBOL)
@@ -233,17 +235,28 @@
 	(single-slot bebida_por_plato
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Menu "Información sobre el menu"
 	(is-a USER)
 	(role concrete)
-	(single-slot bebida
-;+		(comment "Bebida asociada al plato")
+	(single-slot valoracion
+;+		(comment "Rating del menú/plato para el cliente en concreto")
+		(type SYMBOL)
+		(allowed-values Excelente Bueno Normal Malo P%C3%A9simo)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot precio
+;+		(comment "Precio del plato")
+		(type FLOAT)
+		(range 0.0 %3FVARIABLE)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot bebida
+;+		(comment "Bebida asociada al plato / menú")
 		(type INSTANCE)
 ;+		(allowed-classes Bebida)
-;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot segundo
 ;+		(comment "Segundo plato del menu")
@@ -267,44 +280,56 @@
 (defclass Plato "Información sobre el plato"
 	(is-a USER)
 	(role abstract)
+	(multislot info_generica
+;+		(comment "Información genérica del plato")
+		(type SYMBOL)
+		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterr%C3%A1neo Japon%C3%A9s)
+		(create-accessor read-write))
 	(single-slot precio
 ;+		(comment "Precio del plato")
 		(type FLOAT)
+		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot valoracion
-;+		(comment "Rating del plato segun el cliente")
-		(type FLOAT)
-		(range 0.0 10.0)
+;+		(comment "Rating del menú/plato para el cliente en concreto")
+		(type SYMBOL)
+		(allowed-values Excelente Bueno Normal Malo P%C3%A9simo)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot ingredientes
 		(type INSTANCE)
 ;+		(allowed-classes Ingrediente)
 		(create-accessor read-write))
-	(single-slot dieta
-		(type SYMBOL)
-		(allowed-values vegana vegetariana)
-;+		(cardinality 0 1)
+	(multislot combina_bien
+;+		(comment "Indica los platos con cuales combina bien.")
+		(type INSTANCE)
+;+		(allowed-classes Plato)
 		(create-accessor read-write))
 	(single-slot nombre
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot bebida
-;+		(comment "Bebida asociada al plato")
+	(multislot bebida
+;+		(comment "Bebida asociada al plato / menú")
 		(type INSTANCE)
 ;+		(allowed-classes Bebida)
-;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot disponibilidad
+;+		(comment "Disponibilidad del ingrediente/plato durante el año")
+		(type SYMBOL)
+		(allowed-values Primavera Verano Oto%C3%B1o Invierno Total)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
-(defclass Principal "Información sobre el primero"
+(defclass Principal "Información sobre el primero o segundo plato"
 	(is-a Plato)
 	(role concrete)
 	(single-slot papel
+;+		(comment "Possible papel en el menú, si es primero o segundo o puede ser ambos")
 		(type SYMBOL)
 		(allowed-values Primero Segundo Ambos)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Postre "Información sobre el postre"
@@ -322,21 +347,17 @@
 	(single-slot precio
 ;+		(comment "Precio del plato")
 		(type FLOAT)
+		(range 0.0 %3FVARIABLE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot ingredientes
+	(multislot combina_bien
+;+		(comment "Indica los platos con cuales combina bien.")
 		(type INSTANCE)
-;+		(allowed-classes Ingrediente)
+;+		(allowed-classes Plato)
 		(create-accessor read-write))
 	(single-slot nombre
 		(type STRING)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot compatibilidad
-;+		(comment "la compatibilidad con los diferentes platos que podemos elaborar")
-		(type FLOAT)
-		(range 0.0 10.0)
-;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
 (defclass Ingrediente
@@ -346,11 +367,11 @@
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot epoca
-;+		(comment "Epoca del año en la que se celebra el evento")
+	(single-slot disponibilidad
+;+		(comment "Disponibilidad del ingrediente/plato durante el año")
 		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno)
-;+		(cardinality 0 1)
+		(allowed-values Primavera Verano Oto%C3%B1o Invierno Total)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Sugerencia
@@ -359,6 +380,7 @@
 	(multislot menus_ofrecidos
 		(type INSTANCE)
 ;+		(allowed-classes Menu)
+		(cardinality 0 3)
 		(create-accessor read-write))
 	(single-slot evento
 		(type INSTANCE)
