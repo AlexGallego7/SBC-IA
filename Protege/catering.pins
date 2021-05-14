@@ -1,7 +1,22 @@
-; Fri May 14 00:11:22 CEST 2021
+; Fri May 14 18:12:42 CEST 2021
 ; 
 ;+ (version "3.5")
-;+ (build "Build 660")
+;+ (build "Build 663")
+
+([catering_Class0] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[catering_Class10020]
+		[catering_Class10019]
+		[catering_Class1])
+	(nombre "TartaQueso")
+	(precio 3.0))
+
+([catering_Class1] of  Ingrediente
+
+	(disponibilidad Total)
+	(nombre "Queso"))
 
 ([catering_Class10005] of  Ingrediente
 
@@ -70,7 +85,7 @@
 		[catering_Class10019]
 		[catering_Class10022]
 		[catering_Class10021])
-	(nombre "Tarta de chocolate")
+	(nombre "TartaChocolate")
 	(precio 2.5))
 
 ([catering_Class10018] of  Ingrediente
@@ -96,7 +111,7 @@
 ([catering_Class10022] of  Ingrediente
 
 	(disponibilidad Total)
-	(nombre "Lecha Entera"))
+	(nombre "LechaEntera"))
 
 ([catering_Class10023] of  Ingrediente
 
@@ -107,7 +122,7 @@
 
 	(alcoholica TRUE)
 	(combina_bien [catering_Class2])
-	(nombre "Vino Blanco")
+	(nombre "VinoBlanco")
 	(precio 3.0))
 
 ([catering_Class10028] of  Bebida
@@ -119,13 +134,13 @@
 ([catering_Class10029] of  Bebida
 
 	(alcoholica TRUE)
-	(nombre "Vino tinto")
+	(nombre "VinoTinto")
 	(precio 3.0))
 
 ([catering_Class10030] of  Bebida
 
 	(alcoholica FALSE)
-	(nombre "Coca Cola")
+	(nombre "CocaCola")
 	(precio 1.25))
 
 ([catering_Class2] of  Principal
@@ -136,7 +151,7 @@
 		[catering_Class3]
 		[catering_Class10006]
 		[catering_Class4])
-	(nombre "Salmón ahumado")
+	(nombre "SalmónAhumado")
 	(papel Ambos)
 	(precio 7.0))
 
