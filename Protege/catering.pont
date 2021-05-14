@@ -1,4 +1,4 @@
-; Fri May 14 18:12:42 CEST 2021
+; Fri May 14 18:29:19 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -11,10 +11,6 @@
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot catering_Class11
-		(type STRING)
-;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot max_price
 ;+		(comment "Precio máximo del menu")
@@ -143,27 +139,15 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot catering_Class5
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot estilo
 		(type SYMBOL)
 		(allowed-values Clasico Moderno Regional Sibarita)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot nombre
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(multislot menus_ofrecidos
 		(type INSTANCE)
 ;+		(allowed-classes Menu)
 		(cardinality 0 3)
-		(create-accessor read-write))
-	(single-slot catering_Class6
-		(type STRING)
-;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
 (defclass Evento "Información sobre el evento"
@@ -292,10 +276,6 @@
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
 		(create-accessor read-write))
-	(single-slot nombre
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(multislot bebida
 ;+		(comment "Bebida asociada al plato / menú")
 		(type INSTANCE)
@@ -339,19 +319,11 @@
 ;+		(comment "Indica los platos con cuales combina bien.")
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
-		(create-accessor read-write))
-	(single-slot nombre
-		(type STRING)
-;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Ingrediente
 	(is-a USER)
 	(role concrete)
-	(single-slot nombre
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot disponibilidad
 ;+		(comment "Disponibilidad del ingrediente/plato durante el año")
 		(type SYMBOL)
