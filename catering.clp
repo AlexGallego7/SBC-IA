@@ -532,6 +532,9 @@
     (slot bebida (type STRING) (default "None"))
     (slot estilo (type STRING) (default "None"))
     (slot region (type STRING) (default "None"))
+	(slot dieta (type STRING) (default "None"))
+	(slot alcohol (type STRING) (default "Yes"))
+	(multislot ing_prohibidos (type INSTANCE) (allowed-classes Ingrediente))
 )
 
 ;; ------------------------
@@ -580,6 +583,10 @@
 	(focus recopilacion-datos-evento)
 )
 
+;; 			------
+;; 				REGLAS DEL MÓDULO "RECOPILACION-DATOS-EVENTO
+;;			------
+
 (defrule recopilacion-datos-evento::establecer-comensales "Indica el numero de comensales"
     (not (datos-evento))
     =>
@@ -624,6 +631,10 @@
     =>
     (focus recopilacion-restricciones)
 )
+
+;; 			------
+;; 				REGLAS DEL MÓDULO "RECOPILACION-RESTRICCIONES
+;;			------
 
 (defrule recopilacion-restricciones::establecer_precio_min "Indica el precio minimo"
     (not (datos-restricciones))
@@ -692,4 +703,33 @@
     (if (= ?r 5) then (bind ?region "Mexico"))
     
     (modify ?g (region ?region))
+)
+
+(defrule recopilacion-restricciones::establecer_dieta "Indica si se sigue alguna dieta"
+    ?g <- (datos-restricciones (dieta ?dieta))
+    (test (eq ?dieta "None"))
+    =>
+    (bind ?valores (create$ "Vegetariana" "Vegana" "Ninguna"))
+    (bind ?r (pregunta-symbol "Sigue alguna dieta en concreto?" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?dieta "Vegetariana"))
+    (if (= ?r 2) then (bind ?dieta "Vegana"))
+	(if (= ?r 3) then (bind ?dieta "Ninguna"))
+    
+    (modify ?g (dieta ?dieta))
+)
+
+(defrule recopilacion-restricciones::establecer_ingredientes_prohibidos "Indica los ingredientes a evitar"
+	(declare (salience -1))
+    ;;?g <- (datos-restricciones)
+    ;;(test (eq ?ing_prohibidos Null))
+	?i <- (object (is-a Ingrediente))
+	=>
+	(printout t ?i)
+	;;(bind ?valores (create$ (object (is-a Ingrediente))))
+    ;;(bind ?r (pregunta-symbol "Indica los ingredientes que quiere excluir" ?valores))
+    ;;(printout t crlf)
+    
+    ;;(modify ?g (ing_prohibidos ?ing_prohibidos))
 )
