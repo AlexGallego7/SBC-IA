@@ -1,4 +1,4 @@
-; Fri May 14 18:11:48 CEST 2021
+; Mon May 17 17:39:28 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -12,6 +12,7 @@
 	(height 100)
 	(is_hidden FALSE)
 	(name ":ANNOTATION-TEXT")
+	(property_list [catering_ProjectKB_Class20103])
 	(widget_class_name "edu.stanford.smi.protege.widget.YellowStickyWidget")
 	(width 200)
 	(x 0)
@@ -20,14 +21,10 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[catering_ProjectKB_Class20078]
-		[catering_ProjectKB_Class20079]
-		[catering_ProjectKB_Class20080]
-		[catering_ProjectKB_Class20081]
-		[catering_ProjectKB_Class20082]
-		[catering_ProjectKB_Class20083]
-		[catering_ProjectKB_Class20084]
-		[catering_ProjectKB_Class20085]))
+		[catering_ProjectKB_Class20260]
+		[catering_ProjectKB_Class20261]
+		[catering_ProjectKB_Class20262]
+		[catering_ProjectKB_Class20263]))
 
 ([catering_ProjectKB_Class1] of  Widget
 
@@ -236,61 +233,100 @@
 ([catering_ProjectKB_Class20] of  Property_List
 )
 
-([catering_ProjectKB_Class20078] of  String
+([catering_ProjectKB_Class20034] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "nombre")
+	(property_list [catering_ProjectKB_Class20035])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([catering_ProjectKB_Class20035] of  Property_List
+)
+
+([catering_ProjectKB_Class20100] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "nombre")
+	(property_list [catering_ProjectKB_Class20101])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([catering_ProjectKB_Class20101] of  Property_List
+)
+
+([catering_ProjectKB_Class20102] of  Property_List
+
+	(name "layout properties"))
+
+([catering_ProjectKB_Class20103] of  Property_List
+)
+
+([catering_ProjectKB_Class20108] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name ":NAME")
+	(property_list [catering_ProjectKB_Class20109])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceNameWidget")
+	(width 200)
+	(x 0)
+	(y 480))
+
+([catering_ProjectKB_Class20109] of  Property_List
+)
+
+([catering_ProjectKB_Class20260] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([catering_ProjectKB_Class20079] of  String
+([catering_ProjectKB_Class20261] of  String
 
 	(name "Evento")
 	(string_value "epoca"))
 
-([catering_ProjectKB_Class20080] of  String
+([catering_ProjectKB_Class20262] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))
 
-([catering_ProjectKB_Class20081] of  String
-
-	(name "Principal")
-	(string_value "nombre"))
-
-([catering_ProjectKB_Class20082] of  String
-
-	(name "Postre")
-	(string_value "nombre"))
-
-([catering_ProjectKB_Class20083] of  String
+([catering_ProjectKB_Class20263] of  String
 
 	(name ":META-CLASS")
 	(string_value "%3ANAME"))
 
-([catering_ProjectKB_Class20084] of  String
-
-	(name "Ingrediente")
-	(string_value "nombre"))
-
-([catering_ProjectKB_Class20085] of  String
-
-	(name "Bebida")
-	(string_value "nombre"))
-
-([catering_ProjectKB_Class20086] of  Map_Entry
+([catering_ProjectKB_Class20264] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([catering_ProjectKB_Class20087] of  Map_Entry
+([catering_ProjectKB_Class20265] of  Map
+)
+
+([catering_ProjectKB_Class20266] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "catering_ProjectKB_Class20265")
+	(value_class "java.util.Map"))
+
+([catering_ProjectKB_Class20267] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
-	(value "false")
+	(value "true")
 	(value_class "java.lang.String"))
 
-([catering_ProjectKB_Class20088] of  Map_Entry
+([catering_ProjectKB_Class20268] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")
@@ -667,10 +703,10 @@
 		[catering_ProjectKB_Class10025]
 		[catering_ProjectKB_Class10027]
 		[catering_ProjectKB_Class10033]
-		[catering_ProjectKB_Class10037]
 		[catering_ProjectKB_Class10039]
 		[catering_ProjectKB_Class10043]
-		[catering_ProjectKB_Class20359]))
+		[catering_ProjectKB_Class20359]
+		[catering_ProjectKB_Class20108]))
 
 ([catering_ProjectKB_Class93] of  Property_List
 
@@ -711,7 +747,8 @@
 		[ANNOTATED_INSTANCE_WIDGET]
 		[CREATOR_WIDGET]
 		[CREATION_TIMESTAMP_WIDGET]
-		[ANNOTATION_TEXT_WIDGET]))
+		[ANNOTATION_TEXT_WIDGET]
+		[catering_ProjectKB_Class20102]))
 
 ([INSTANCES_TAB] of  Widget
 
@@ -726,9 +763,11 @@
 ([KB_051431_Class1] of  Map
 
 	(entries
-		[catering_ProjectKB_Class20086]
-		[catering_ProjectKB_Class20087]
-		[catering_ProjectKB_Class20088]))
+		[catering_ProjectKB_Class20264]
+		[catering_ProjectKB_Class20266]
+		[catering_ProjectKB_Class20267]
+		[catering_ProjectKB_Class20268])
+	(referenced_maps [catering_ProjectKB_Class20265]))
 
 ([KB_051431_Class124] of  String
 

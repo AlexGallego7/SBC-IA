@@ -489,10 +489,75 @@
 	(disponibilidad Total))
 )
 
-(deftemplate menu
-    (slot primero)
-    (slot segundo)
-    (slot postre)
+;; ----------------------
+;; DECLARACION DE MODULOS
+;; ----------------------
+
+(defmodule MAIN (export ?ALL))
+
+(defmodule recopilacion-datos-evento
+    (import MAIN ?ALL)
+    (export ?ALL)
+)
+
+(defmodule recopilacion-restricciones
+    (import MAIN ?ALL)
+    (import recopilacion-datos-evento deftemplate ?ALL)
+    (export ?ALL)
+)
+
+(defmodule generacion-soluciones
+	(import MAIN ?ALL)
+	(export ?ALL)
+)
+
+(defmodule resultados
+	(import MAIN ?ALL)
+	(export ?ALL)
+)
+
+;; ------------------------
+;; DECLARACION DE TEMPLATES
+;; ------------------------
+
+(deftemplate MAIN::datos-evento
+    (slot n_comensales (type INTEGER) (default -1)) ; Numero de comensales
+    (slot epoca (type STRING) (default "None"))
+    (slot tipo (type STRING) (default "None"))
+)
+
+(deftemplate MAIN::datos-restricciones
+    (slot precio_max (type INTEGER) (default -1))
+    (slot precio_min (type INTEGER) (default -1))
+    (slot bebida (type STRING) (default "None"))
+    (slot estilo (type STRING) (default "None"))
+    (slot region (type STRING) (default "None"))
+)
+
+;; ------------------------
+;; FUNCIONES PARA PREGUNTAS
+;; ------------------------
+
+(deffunction MAIN::pregunta-int (?p ?rI ?rF)
+    (format t "%s (De %d hasta %d) " ?p ?rI ?rF)
+    (bind ?respuesta (read))
+    (while (not(and(>= ?respuesta ?rI)(<= ?respuesta ?rF))) do
+        (format t "%s (De %d hasta %d) " ?p ?rI ?rF)
+        (bind ?respuesta (read))
+    )
+    ?respuesta
+)
+
+(deffunction MAIN::pregunta-symbol (?p $?arr)
+    (bind ?linea (format nil "%s" ?p))
+    (printout t ?linea crlf)
+    (progn$ (?var ?arr) 
+            (bind ?linea (format nil "  %d. %s" ?var-index ?var))
+            (printout t ?linea crlf)
+    )
+    (bind ?respuesta (pregunta-int "Escoge una opcion:" 1 (length$ ?arr)))
+    
+	?respuesta
 )
 
 ; Comprobar que funciona saca todas las intancias de Bebida
@@ -501,7 +566,130 @@
 ; (reset)
 ; (run)
 
-(defrule list
-    ?i <- (object (is-a Bebida))
-=>
-(printout t ?i))
+;; ------
+;; REGLAS
+;; ------
+
+(defrule MAIN::initialRule "Regla inicial"
+	(declare (salience 10))
+	=>
+  	(printout t crlf)
+	(printout t "!Bienvenido! A continuacion se le formularan una serie de" crlf)
+	(printout t "preguntas para recomendarle una serie de menus." crlf)
+	(printout t crlf)
+	(focus recopilacion-datos-evento)
+)
+
+(defrule recopilacion-datos-evento::establecer-comensales "Indica el numero de comensales"
+    (not (datos-evento))
+    =>
+    (bind ?r (pregunta-int "Cual es el numero de comensales?" 1 50))
+    (printout t crlf)
+    (assert (datos-evento (n_comensales ?r)))
+)
+
+(defrule recopilacion-datos-evento::establecer-epoca "Indica la epoca"
+    ?g <- (datos-evento (epoca ?epoca))
+    (test (eq ?epoca "None"))
+    =>
+    (bind ?valores (create$ "Primavera" "Verano" "Otono" "Invierno"))
+    (bind ?r (pregunta-symbol "En que epoca se celebrara?" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?epoca "Primavera"))
+    (if (= ?r 2) then (bind ?epoca "Verano"))
+    (if (= ?r 3) then (bind ?epoca "Otono"))
+    (if (= ?r 4) then (bind ?epoca "Invierno"))
+    
+    (modify ?g (epoca ?epoca))
+)
+
+(defrule recopilacion-datos-evento::establecer-tipo "Indica el tipo de evento"
+    ?g <- (datos-evento (tipo ?tipo))
+    (test (eq ?tipo "None"))
+    =>
+    (bind ?valores (create$ "Familiar" "Congreso" "Infantil"))
+    (bind ?r (pregunta-symbol "Que tipo de celebracion es?" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?tipo "Familiar"))
+    (if (= ?r 2) then (bind ?tipo "Congreso"))
+    (if (= ?r 3) then (bind ?tipo "Infantil"))
+    
+    (modify ?g (tipo ?tipo))
+)
+
+(defrule recopilacion-datos-evento::pasar-rec-restricciones "Pasar a recopilacion de restricciones"
+    (datos-evento)
+    =>
+    (focus recopilacion-restricciones)
+)
+
+(defrule recopilacion-restricciones::establecer_precio_min "Indica el precio minimo"
+    (not (datos-restricciones))
+    =>
+    (bind ?r (pregunta-int "Cual es el precio minimo?" 1 1000))
+    (printout t crlf)
+    
+    (assert (datos-restricciones (precio_min ?r)))
+)
+
+(defrule recopilacion-restricciones::establecer_precio_max "Indica el precio maximo"
+    ?g <- (datos-restricciones (precio_max ?precio_max))
+    (test (eq ?precio_max -1))    
+    =>
+    (bind ?pm (fact-slot-value ?g precio_min))
+    (bind ?r (pregunta-int "Cual es el precio maximo?" (+ ?pm 1) 1000))
+
+    (printout t crlf)
+    
+    (modify ?g (precio_max ?r))
+
+)
+
+(defrule recopilacion-restricciones::establecer_bebida "Indica el tipo de bebida"
+    ?g <- (datos-restricciones (bebida ?bebida))
+    (test (eq ?bebida "None"))
+    =>
+    (bind ?valores (create$ "General" "Por plato"))
+    (bind ?r (pregunta-symbol "Quiere bebida por cada plato o general con el menu?" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?bebida "General"))
+    (if (= ?r 2) then (bind ?bebida "Por plato"))
+    
+    (modify ?g (bebida ?bebida))
+)
+
+(defrule recopilacion-restricciones::establecer_estilo "Indica el tipo de estilo"
+    ?g <- (datos-restricciones (estilo ?estilo))
+    (test (eq ?estilo "None"))
+    =>
+    (bind ?valores (create$ "Clasico (Comida tradicional y raciones abundantes)" "Moderno (Comida moderna y raciones minimalistas)" "Regional (Comida originaria de un lugar a especificar)" "Sibarita (Comida exclusiva para paladares exigentes)"))
+    (bind ?r (pregunta-symbol "Que estilo quiere en su menu?" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?estilo "Clasico"))
+    (if (= ?r 2) then (bind ?estilo "Moderno"))
+    (if (= ?r 3) then (bind ?estilo "Regional"))
+    (if (= ?r 4) then (bind ?estilo "Sibarita"))
+    
+    (modify ?g (estilo ?estilo))
+)
+
+(defrule recopilacion-restricciones::establecer_region "Indica la region"
+    ?g <- (datos-restricciones (region ?region) (estilo ?estilo))
+    (and (test (eq ?region "None")) (test (eq ?estilo "Regional")))
+    =>
+    (bind ?valores (create$ "Italia" "Mediterraneo" "Arabe" "China" "Mexico"))
+    (bind ?r (pregunta-symbol "Que region le interesa para el menu" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?region "Italia"))
+    (if (= ?r 2) then (bind ?region "Mediterraneo"))
+    (if (= ?r 3) then (bind ?region "Arabe"))
+    (if (= ?r 4) then (bind ?region "China"))
+    (if (= ?r 5) then (bind ?region "Mexico"))
+    
+    (modify ?g (region ?region))
+)
