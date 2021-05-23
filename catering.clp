@@ -500,9 +500,24 @@
     (export ?ALL)
 )
 
+(defmodule recopilacion-datos-menu
+    (import MAIN ?ALL)
+    (import recopilacion-datos-evento deftemplate ?ALL)
+    (export ?ALL)
+)
+
 (defmodule recopilacion-restricciones
     (import MAIN ?ALL)
     (import recopilacion-datos-evento deftemplate ?ALL)
+    (import recopilacion-datos-menu deftemplate ?ALL)
+    (export ?ALL)
+)
+
+(defmodule procesar-datos
+    (import MAIN ?ALL)
+    (import recopilacion-datos-evento deftemplate ?ALL)
+    (import recopilacion-datos-menu deftemplate ?ALL)
+    (import recopilacion-restricciones deftemplate ?ALL)
     (export ?ALL)
 )
 
@@ -521,21 +536,36 @@
 ;; ------------------------
 
 (deftemplate MAIN::datos-evento
-    (slot n_comensales (type INTEGER) (default -1)) ; Numero de comensales
+    (slot n_comensales (type STRING) (default "None")) ; Numero de comensales
     (slot epoca (type STRING) (default "None"))
     (slot tipo (type STRING) (default "None"))
 )
 
-(deftemplate MAIN::datos-restricciones
-    (slot precio_max (type INTEGER) (default -1))
-    (slot precio_min (type INTEGER) (default -1))
+(deftemplate MAIN::datos-menu
     (slot bebida (type STRING) (default "None"))
     (slot estilo (type STRING) (default "None"))
     (slot region (type STRING) (default "None"))
-	(slot dieta (type STRING) (default "None"))
-	(slot alcohol (type STRING) (default "Yes"))
-	(multislot ing_prohibidos (type INSTANCE) (allowed-classes Ingrediente))
 )
+
+
+(deftemplate MAIN::datos-restricciones
+    (slot precio_max (type INTEGER) (default -1))
+    (slot precio_min (type INTEGER) (default -1))
+	(slot alcohol (type STRING) (default "Yes"))
+	(slot dieta (type STRING) (default "None"))
+    (multislot ingredientes_prohibidos (type STRING))
+    
+)
+
+(deftemplate MAIN::sugerencia-menu
+    (slot primero (type INSTANCE) (allowed-classes Principal))
+    (slot segundo (type INSTANCE (allowed-classes Principal))
+    (slot postre (type INSTANCE (allowed-classes Postre))
+    (slot puntuacion (type INTEGER) (default -1))
+)
+
+(deftemplate MAIN::abstracciones
+    (slot abs_precio (type SYMBOL) (allowed-values Null Barato Economico Caro))
 
 ;; ------------------------
 ;; FUNCIONES PARA PREGUNTAS
@@ -555,13 +585,23 @@
     (bind ?linea (format nil "%s" ?p))
     (printout t ?linea crlf)
     (progn$ (?var ?arr) 
-            (bind ?linea (format nil "  %d. %s" ?var-index ?var))
+            (bind ?linea (format nil " %d. %s" ?var-index ?var))
             (printout t ?linea crlf)
     )
     (bind ?respuesta (pregunta-int "Escoge una opcion:" 1 (length$ ?arr)))
     
 	?respuesta
 )
+
+(deffunction MAIN::pregunta-llista (?p)
+    (bind ?linea (format nil "%s" ?p))
+    (printout t ?linea crlf)
+    (bind ?respuesta (readline))
+    (bind ?res (str-explode ?respuesta))
+    
+    ?res
+)
+    
 
 ; Comprobar que funciona saca todas las intancias de Bebida
 ; IMPORTANTE!!! PARA EJECUTAR EN CLIPS:
@@ -580,7 +620,7 @@
 	(printout t "!Bienvenido! A continuacion se le formularan una serie de" crlf)
 	(printout t "preguntas para recomendarle una serie de menus." crlf)
 	(printout t crlf)
-	(focus recopilacion-datos-evento)
+	(focus recopilacion-restricciones)
 )
 
 ;; 			------
@@ -592,6 +632,10 @@
     =>
     (bind ?r (pregunta-int "Cual es el numero de comensales?" 1 50))
     (printout t crlf)
+    (if (and (>= ?r 1) (<= ?r 10)) then (bind ?tipo "Bajo"))
+    (if (and (>= ?r 11) (<= ?r 30)) then (bind ?tipo "Medio"))
+    (if (and (>= ?r 31) (<= ?r 50)) then (bind ?tipo "Alto"))
+
     (assert (datos-evento (n_comensales ?r)))
 )
 
@@ -626,11 +670,68 @@
     (modify ?g (tipo ?tipo))
 )
 
-(defrule recopilacion-datos-evento::pasar-rec-restricciones "Pasar a recopilacion de restricciones"
+(defrule recopilacion-datos-evento::pasar-rec-datos-menu "Pasar a recopilacion de datos de menu"
     (datos-evento)
+    =>
+    (focus recopilacion-datos-menu)
+)
+
+;; 			------
+;; 				REGLAS DEL MÓDULO "RECOPILACION-DATOS-MENU
+;;			------
+
+(defrule recopilacion-datos-menu::establecer_bebida "Indica el tipo de bebida"
+    (not (datos-menu))
+    =>
+    (bind ?valores (create$ "General" "Por plato"))
+    (bind ?r (pregunta-symbol "Quiere bebida por cada plato o general con el menu?" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?bebida "General"))
+    (if (= ?r 2) then (bind ?bebida "Por plato"))
+    
+    (assert (datos-menu (bebida ?r)))
+)
+
+(defrule recopilacion-datos-menu::establecer_estilo "Indica el tipo de estilo"
+    ?g <- (datos-menu (estilo ?estilo))
+    (test (eq ?estilo "None"))
+    =>
+    (bind ?valores (create$ "Clasico (Comida tradicional y raciones abundantes)" "Moderno (Comida moderna y raciones minimalistas)" "Regional (Comida originaria de un lugar a especificar)" "Sibarita (Comida exclusiva para paladares exigentes)"))
+    (bind ?r (pregunta-symbol "Que estilo quiere en su menu?" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?estilo "Clasico"))
+    (if (= ?r 2) then (bind ?estilo "Moderno"))
+    (if (= ?r 3) then (bind ?estilo "Regional"))
+    (if (= ?r 4) then (bind ?estilo "Sibarita"))
+    
+    (modify ?g (estilo ?estilo))
+)
+
+(defrule recopilacion-datos-menu::establecer_region "Indica la region"
+    ?g <- (datos-menu (region ?region) (estilo ?estilo))
+    (and (test (eq ?region "None")) (test (eq ?estilo "Regional")))
+    =>
+    (bind ?valores (create$ "Italia" "Mediterraneo" "Arabe" "China" "Mexico"))
+    (bind ?r (pregunta-symbol "Que region le interesa para el menu" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?region "Italia"))
+    (if (= ?r 2) then (bind ?region "Mediterraneo"))
+    (if (= ?r 3) then (bind ?region "Arabe"))
+    (if (= ?r 4) then (bind ?region "China"))
+    (if (= ?r 5) then (bind ?region "Mexico"))
+    
+    (modify ?g (region ?region))
+)
+
+(defrule recopilacion-datos-menu::pasar-rec-restricciones "Pasar a recopilacion de restricciones"
+    (datos-menu)
     =>
     (focus recopilacion-restricciones)
 )
+
 
 ;; 			------
 ;; 				REGLAS DEL MÓDULO "RECOPILACION-RESTRICCIONES
@@ -658,53 +759,6 @@
 
 )
 
-(defrule recopilacion-restricciones::establecer_bebida "Indica el tipo de bebida"
-    ?g <- (datos-restricciones (bebida ?bebida))
-    (test (eq ?bebida "None"))
-    =>
-    (bind ?valores (create$ "General" "Por plato"))
-    (bind ?r (pregunta-symbol "Quiere bebida por cada plato o general con el menu?" ?valores))
-    (printout t crlf)
-    
-    (if (= ?r 1) then (bind ?bebida "General"))
-    (if (= ?r 2) then (bind ?bebida "Por plato"))
-    
-    (modify ?g (bebida ?bebida))
-)
-
-(defrule recopilacion-restricciones::establecer_estilo "Indica el tipo de estilo"
-    ?g <- (datos-restricciones (estilo ?estilo))
-    (test (eq ?estilo "None"))
-    =>
-    (bind ?valores (create$ "Clasico (Comida tradicional y raciones abundantes)" "Moderno (Comida moderna y raciones minimalistas)" "Regional (Comida originaria de un lugar a especificar)" "Sibarita (Comida exclusiva para paladares exigentes)"))
-    (bind ?r (pregunta-symbol "Que estilo quiere en su menu?" ?valores))
-    (printout t crlf)
-    
-    (if (= ?r 1) then (bind ?estilo "Clasico"))
-    (if (= ?r 2) then (bind ?estilo "Moderno"))
-    (if (= ?r 3) then (bind ?estilo "Regional"))
-    (if (= ?r 4) then (bind ?estilo "Sibarita"))
-    
-    (modify ?g (estilo ?estilo))
-)
-
-(defrule recopilacion-restricciones::establecer_region "Indica la region"
-    ?g <- (datos-restricciones (region ?region) (estilo ?estilo))
-    (and (test (eq ?region "None")) (test (eq ?estilo "Regional")))
-    =>
-    (bind ?valores (create$ "Italia" "Mediterraneo" "Arabe" "China" "Mexico"))
-    (bind ?r (pregunta-symbol "Que region le interesa para el menu" ?valores))
-    (printout t crlf)
-    
-    (if (= ?r 1) then (bind ?region "Italia"))
-    (if (= ?r 2) then (bind ?region "Mediterraneo"))
-    (if (= ?r 3) then (bind ?region "Arabe"))
-    (if (= ?r 4) then (bind ?region "China"))
-    (if (= ?r 5) then (bind ?region "Mexico"))
-    
-    (modify ?g (region ?region))
-)
-
 (defrule recopilacion-restricciones::establecer_dieta "Indica si se sigue alguna dieta"
     ?g <- (datos-restricciones (dieta ?dieta))
     (test (eq ?dieta "None"))
@@ -720,16 +774,23 @@
     (modify ?g (dieta ?dieta))
 )
 
-(defrule recopilacion-restricciones::establecer_ingredientes_prohibidos "Indica los ingredientes a evitar"
-	(declare (salience -1))
-    ;;?g <- (datos-restricciones)
-    ;;(test (eq ?ing_prohibidos Null))
-	?i <- (object (is-a Ingrediente))
-	=>
-	(printout t ?i)
-	;;(bind ?valores (create$ (object (is-a Ingrediente))))
-    ;;(bind ?r (pregunta-symbol "Indica los ingredientes que quiere excluir" ?valores))
-    ;;(printout t crlf)
+(defrule recopilacion-restricciones::establecer_prohibidos "Indica los ingredientes prohibidos"
+    ?g <- (datos-restricciones (ingredientes_prohibidos $?ingredientes_prohibidos))
+    (test (eq 0 (length$ $?ingredientes_prohibidos)))
+    =>
+    (bind ?r (pregunta-llista "Que ingredientes desea evitar? (Ej: Queso Mantequilla Salmon)"))
     
-    ;;(modify ?g (ing_prohibidos ?ing_prohibidos))
+    (modify ?g (ingredientes_prohibidos ?r))
 )
+
+(defrule recopilacion-restricciones::pasar-rec-sugerencia "Pasar a recopilacion de restricciones"
+    (declare (salience -1))
+    =>
+    (focus procesar-datos)
+)
+
+;; 			------
+;; 				REGLAS DEL MÓDULO "PROCESAR-DATOS"
+;;			------
+
+(defrule procesar-datos::abstraer-numero-comensales "Abstrae el numero de comensales"
