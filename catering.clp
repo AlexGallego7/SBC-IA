@@ -1,7 +1,7 @@
-; Fri May 14 18:29:19 CEST 2021
+; Sun May 23 19:48:44 CEST 2021
 ; 
 ;+ (version "3.5")
-;+ (build "Build 663")
+;+ (build "Build 660")
 
 
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
@@ -103,6 +103,11 @@
 	(single-slot precio_max
 ;+		(comment "Precio máximo del menu")
 		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tiempo_coccion
+		(type SYMBOL)
+		(allowed-values Bajo Medio Alto)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot tipo
@@ -276,6 +281,11 @@
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
 		(create-accessor read-write))
+	(single-slot tiempo_coccion
+		(type SYMBOL)
+		(allowed-values Bajo Medio Alto)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(multislot bebida
 ;+		(comment "Bebida asociada al plato / menú")
 		(type INSTANCE)
@@ -291,6 +301,7 @@
 (defclass Principal "Información sobre el primero o segundo plato"
 	(is-a Plato)
 	(role concrete)
+	(pattern-match reactive)
 	(single-slot papel
 ;+		(comment "Possible papel en el menú, si es primero o segundo o puede ser ambos")
 		(type SYMBOL)
@@ -300,7 +311,8 @@
 
 (defclass Postre "Información sobre el postre"
 	(is-a Plato)
-	(role concrete))
+	(role concrete)
+	(pattern-match reactive))
 
 (defclass Bebida "Información sobre la bebida"
 	(is-a USER)
@@ -323,13 +335,7 @@
 
 (defclass Ingrediente
 	(is-a USER)
-	(role concrete)
-	(single-slot disponibilidad
-;+		(comment "Disponibilidad del ingrediente/plato durante el año")
-		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno Total)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+	(role concrete))
 
 (defclass Sugerencia
 	(is-a USER)
@@ -353,12 +359,10 @@
 (definstances Instancias
 
 ([Azucar] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Chocolate] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([CocaCola] of  Bebida
 
@@ -366,8 +370,7 @@
 	(precio 1.25))
 
 ([Cordero] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Ensalada] of  Principal
 
@@ -379,11 +382,11 @@
 		[Zanahoria]
 		[Remolacha])
 	(papel Primero)
-	(precio 5.0))
+	(precio 5.0)
+	(tiempo_coccion Bajo))
 
 ([Esparrago] of  Ingrediente
-
-	(disponibilidad Primavera))
+)
 
 ([Fanta] of  Bebida
 
@@ -391,56 +394,43 @@
 	(precio 1.25))
 
 ([Fresa] of  Ingrediente
-
-	(disponibilidad Verano))
+)
 
 ([Galleta] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Leche] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Lechuga] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Limon] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Mantequilla] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Melon] of  Ingrediente
-
-	(disponibilidad Verano))
+)
 
 ([Naranja] of  Ingrediente
-
-	(disponibilidad Verano))
+)
 
 ([Pepino] of  Ingrediente
-
-	(disponibilidad Verano))
+)
 
 ([Queso] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Remolacha] of  Ingrediente
-
-	(disponibilidad Oto%C3%B1o))
+)
 
 ([Sal] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Salmon] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([SalmonAhumado] of  Principal
 
@@ -451,7 +441,8 @@
 		[Limon]
 		[Sal])
 	(papel Ambos)
-	(precio 7.0))
+	(precio 7.0)
+	(tiempo_coccion Alto))
 
 ([TartaChocolate] of  Postre
 
@@ -462,7 +453,8 @@
 		[Galleta]
 		[Leche]
 		[Mantequilla])
-	(precio 2.5))
+	(precio 2.5)
+	(tiempo_coccion Bajo))
 
 ([TartaQueso] of  Postre
 
@@ -471,7 +463,8 @@
 		[Azucar]
 		[Galleta]
 		[Queso])
-	(precio 3.0))
+	(precio 3.0)
+	(tiempo_coccion Bajo))
 
 ([VinoBlanco] of  Bebida
 
@@ -484,9 +477,7 @@
 	(alcoholica TRUE)
 	(precio 3.0))
 
-([Zanahoria] of  Ingrediente
-
-	(disponibilidad Total))
+([Zanahoria] of  Ingrediente)
 )
 
 ;; ----------------------
@@ -526,6 +517,16 @@
 	(export ?ALL)
 )
 
+(defmodule seleccion
+	(import MAIN ?ALL)
+	(import recopilacion-datos-evento deftemplate ?ALL)
+    (import recopilacion-datos-menu deftemplate ?ALL)
+    (import recopilacion-restricciones deftemplate ?ALL)
+	(import procesar-datos deftemplate ?ALL)
+	(import generacion-soluciones deftemplate ?ALL)
+	(export ?ALL)
+)
+
 (defmodule resultados
 	(import MAIN ?ALL)
 	(export ?ALL)
@@ -559,13 +560,17 @@
 
 (deftemplate MAIN::sugerencia-menu
     (slot primero (type INSTANCE) (allowed-classes Principal))
-    (slot segundo (type INSTANCE (allowed-classes Principal))
-    (slot postre (type INSTANCE (allowed-classes Postre))
+    (slot segundo (type INSTANCE) (allowed-classes Principal))
+    (slot postre (type INSTANCE) (allowed-classes Postre))
+	(slot bebida (type INSTANCE)(allowed-classes Bebida))
     (slot puntuacion (type INTEGER) (default -1))
+	(slot precio (type FLOAT) (default 0.0))
 )
 
 (deftemplate MAIN::abstracciones
-    (slot abs_precio (type SYMBOL) (allowed-values Null Barato Economico Caro))
+    (slot abs_precio (type SYMBOL) (allowed-values Null Barato Economico Caro Lujoso))
+	
+)
 
 ;; ------------------------
 ;; FUNCIONES PARA PREGUNTAS
@@ -793,4 +798,108 @@
 ;; 				REGLAS DEL MÓDULO "PROCESAR-DATOS"
 ;;			------
 
-(defrule procesar-datos::abstraer-numero-comensales "Abstrae el numero de comensales"
+(defrule procesar-datos::abstraer_precio_persona "Abstraccion del precio de la persona"
+	 ?p <- (datos-restricciones (precio_max ?p_max))
+	 =>
+	(if (>= 20 ?p_max) then (bind ?tipo Barato))
+	(if (>= 35 ?p_max) then (bind ?tipo Economico))
+	(if (>= 60 ?p_max) then (bind ?tipo Caro))
+	(if (>= 100 ?p_max) then (bind ?tipo Lujoso))
+
+	(assert (abstracciones (abs_precio ?tipo)))	
+)
+
+(defrule procesar-datos::abstraer_precio_persona "Abstraccion del precio de la persona"
+	 ?p <- (datos-restricciones (precio_max ?p_max))
+	 =>
+	(if (>= 20 ?p_max) then (bind ?tipo Barato))
+	(if (>= 35 ?p_max) then (bind ?tipo Economico))
+	(if (>= 60 ?p_max) then (bind ?tipo Caro))
+	(if (>= 100 ?p_max) then (bind ?tipo Lujoso))
+
+	(assert (abstracciones (abs_precio ?tipo)))
+	(focus generacion-soluciones)
+)
+
+;;(defrule procesar-datos::abstraer_valoracion_plato "Abstraccion del la valoracion de los platos"
+;;	 ?g <- (datos-evento (epoca ?epoca))
+;;	 =>
+;;	 (bind ?platos (find-all-instances ((?plato Plato)) TRUE))
+;;	 (loop-for-count (?i 1 (length$ ?platos)) do
+;;			(bind ?plato_epoca (send (nth$ ?i $?platos) get-epoca)))
+;;)
+	
+
+;; 			------
+;; 				REGLAS DEL MÓDULO "GENERA-SOLUCIONES"
+;;			------
+
+(defrule generacion-soluciones::generar-menu
+	?primero <- (object (is-a Principal))
+	?segundo <- (object (is-a Principal))
+	?postre <- (object (is-a Postre))
+	?bebida <- (object (is-a Bebida))
+	(test (and (and (neq ?primero ?segundo) (or (eq (send ?primero get-papel) Primero) (eq (send ?primero get-papel) Ambos)))
+			 (or (eq (send ?segundo get-papel) Segundo) (eq (send ?segundo get-papel) Ambos))))
+	=> 
+	(bind ?precio (+ (+ (+ (send ?primero get-precio) (send ?segundo get-precio))(send ?postre get-precio)) (send ?bebida get-precio)))  
+	(assert (sugerencia-menu (primero ?primero) (segundo ?segundo) (postre ?postre) (bebida ?bebida) (precio ?precio)))
+)
+		
+(defrule generacion-soluciones::pasar-resultados "Pasar a la muestra de resultados"
+    (declare (salience -1))
+    =>
+    (focus seleccion)
+)
+
+;; 			------
+;; 				REGLAS DEL MÓDULO "SELECCION"
+;;			------
+
+(defrule seleccion::seleccion-platos-por-precio "Selecciona los platos dentro del rango de precio"
+    ?s <- (sugerencia-menu (precio ?precio))
+	?p <- (datos-restricciones (precio_min ?p_min) (precio_max ?p_max))
+	(test (or (> ?precio ?p_max) (< ?precio ?p_min)))
+    =>
+	(printout t "se va a eliminar esta sugerencia " ?s " debido a su precio del " ?precio crlf)
+	(retract ?s)
+)
+
+(defrule seleccion::seleccion-platos-por-ingredientes "Selecciona los sin ingredientes prohibidos"
+    ?d <- (datos-restricciones (ingredientes_prohibidos $?ing_prohibidos))
+	?s <- (sugerencia-menu (primero ?primero) (segundo ?segundo) (postre ?postre) (precio ?precio))
+    => 
+	(bind ?ings_primero (send ?primero get-ingredientes))
+	(printout t "ingrediente del primero: " ?ings_primero)
+	(bind ?ings_segundo (send ?segundo get-ingredientes))
+	(bind ?ings_postre (send ?postre get-ingredientes))
+	(bind ?cond FALSE)
+	(bind ?index 1)
+	(while (and (not ?cond) (< ?index (length$ $?ing_prohibidos))) do
+		if( (member (nth$ ?i $?ing_prohibidos) ?ings_primero) 
+			then 
+				(bind ?cond TRUE)
+			else 
+				if( (member (nth$ ?i $?ing_prohibidos) ?ings_segundo) 
+					then 
+						(bind ?cond TRUE)
+					else 
+						if( (member (nth$ ?i $?ing_prohibidos) ?ings_postre) 
+							then 
+								(bind ?cond TRUE))))
+	)
+	(if(?cond) then (retract ?s))
+	
+)
+
+;; 			------
+;; 				REGLAS DEL MÓDULO "RESULTADOS"
+;;			------
+
+(defrule resultados::pasar-resultados "Pasar a la muestra de resultados"
+    ?s <- (sugerencia-menu)
+    =>
+    
+)
+
+

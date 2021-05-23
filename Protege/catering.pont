@@ -1,7 +1,7 @@
-; Mon May 17 17:39:28 CEST 2021
+; Sun May 23 19:48:44 CEST 2021
 ; 
 ;+ (version "3.5")
-;+ (build "Build 663")
+;+ (build "Build 660")
 
 
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
@@ -103,6 +103,11 @@
 	(single-slot precio_max
 ;+		(comment "Precio máximo del menu")
 		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tiempo_coccion
+		(type SYMBOL)
+		(allowed-values Bajo Medio Alto)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot tipo
@@ -276,6 +281,11 @@
 		(type INSTANCE)
 ;+		(allowed-classes Plato)
 		(create-accessor read-write))
+	(single-slot tiempo_coccion
+		(type SYMBOL)
+		(allowed-values Bajo Medio Alto)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(multislot bebida
 ;+		(comment "Bebida asociada al plato / menú")
 		(type INSTANCE)
@@ -323,13 +333,7 @@
 
 (defclass Ingrediente
 	(is-a USER)
-	(role concrete)
-	(single-slot disponibilidad
-;+		(comment "Disponibilidad del ingrediente/plato durante el año")
-		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno Total)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+	(role concrete))
 
 (defclass Sugerencia
 	(is-a USER)

@@ -1,15 +1,13 @@
-; Mon May 17 17:39:28 CEST 2021
+; Sun May 23 19:48:44 CEST 2021
 ; 
 ;+ (version "3.5")
-;+ (build "Build 663")
+;+ (build "Build 660")
 
 ([Azucar] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Chocolate] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([CocaCola] of  Bebida
 
@@ -17,8 +15,7 @@
 	(precio 1.25))
 
 ([Cordero] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Ensalada] of  Principal
 
@@ -30,11 +27,11 @@
 		[Zanahoria]
 		[Remolacha])
 	(papel Primero)
-	(precio 5.0))
+	(precio 5.0)
+	(tiempo_coccion Bajo))
 
 ([Esparrago] of  Ingrediente
-
-	(disponibilidad Primavera))
+)
 
 ([Fanta] of  Bebida
 
@@ -42,56 +39,43 @@
 	(precio 1.25))
 
 ([Fresa] of  Ingrediente
-
-	(disponibilidad Verano))
+)
 
 ([Galleta] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Leche] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Lechuga] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Limon] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Mantequilla] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Melon] of  Ingrediente
-
-	(disponibilidad Verano))
+)
 
 ([Naranja] of  Ingrediente
-
-	(disponibilidad Verano))
+)
 
 ([Pepino] of  Ingrediente
-
-	(disponibilidad Verano))
+)
 
 ([Queso] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Remolacha] of  Ingrediente
-
-	(disponibilidad Oto%C3%B1o))
+)
 
 ([Sal] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([Salmon] of  Ingrediente
-
-	(disponibilidad Total))
+)
 
 ([SalmonAhumado] of  Principal
 
@@ -102,7 +86,8 @@
 		[Limon]
 		[Sal])
 	(papel Ambos)
-	(precio 7.0))
+	(precio 7.0)
+	(tiempo_coccion Alto))
 
 ([TartaChocolate] of  Postre
 
@@ -113,7 +98,8 @@
 		[Galleta]
 		[Leche]
 		[Mantequilla])
-	(precio 2.5))
+	(precio 2.5)
+	(tiempo_coccion Bajo))
 
 ([TartaQueso] of  Postre
 
@@ -122,7 +108,8 @@
 		[Azucar]
 		[Galleta]
 		[Queso])
-	(precio 3.0))
+	(precio 3.0)
+	(tiempo_coccion Bajo))
 
 ([VinoBlanco] of  Bebida
 
@@ -136,5 +123,4 @@
 	(precio 3.0))
 
 ([Zanahoria] of  Ingrediente
-
-	(disponibilidad Total))
+)
