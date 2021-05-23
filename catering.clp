@@ -870,25 +870,33 @@
 	?s <- (sugerencia-menu (primero ?primero) (segundo ?segundo) (postre ?postre) (precio ?precio))
     => 
 	(bind ?ings_primero (send ?primero get-ingredientes))
-	(printout t "ingrediente del primero: " ?ings_primero)
 	(bind ?ings_segundo (send ?segundo get-ingredientes))
 	(bind ?ings_postre (send ?postre get-ingredientes))
 	(bind ?cond FALSE)
-	(bind ?index 1)
-	(while (and (not ?cond) (< ?index (length$ $?ing_prohibidos))) do
-		if( (member (nth$ ?i $?ing_prohibidos) ?ings_primero) 
-			then 
+	(bind ?i 1)
+	
+	(while (and (not ?cond) (<= ?i (length$ $?ing_prohibidos))) do
+        
+		(if (member$ (sym-cat "[" (nth$ ?i $?ing_prohibidos) "]") ?ings_primero) 
+            then 
+                (printout t "llego1" clrf)
 				(bind ?cond TRUE)
 			else 
-				if( (member (nth$ ?i $?ing_prohibidos) ?ings_segundo) 
+                (if (member$ (sym-cat "[" (nth$ ?i $?ing_prohibidos) "]") ?ings_segundo) 
 					then 
+                        (printout t "llego2" clrf)
 						(bind ?cond TRUE)
 					else 
-						if( (member (nth$ ?i $?ing_prohibidos) ?ings_postre) 
+						(if (member$ (sym-cat "[" (nth$ ?i $?ing_prohibidos) "]") ?ings_postre) 
 							then 
+                                (printout t "llego3" clrf)
 								(bind ?cond TRUE))))
+        (bind ?i (+ ?i 1))
 	)
-	(if(?cond) then (retract ?s))
+	(if ?cond
+        then 
+            (printout t "se va a eliminar esta sugerencia " ?s " debido a un ingrediente" crlf)
+            (retract ?s))
 	
 )
 
