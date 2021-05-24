@@ -1,4 +1,4 @@
-; Mon May 24 23:45:09 CEST 2021
+; Tue May 25 00:12:57 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -65,13 +65,7 @@
 		[Hamburguesa]
 		[Harira]
 		[Pollo+al+Ast]
-		[Sopa+de+miso]
-		[Tortilla+de+patatas]
-		[Brownie]
-		[Crema+catalana]
-		[Helado+de+fresa]
-		[Tarta+de+chocolate]
-		[Trufas+de+chocolate])
+		[Sopa+de+miso])
 	(disponibilidad Total)
 	(info_generica Vegetariano Caliente Mediterraneo Clasico Vegano)
 	(ingredientes
@@ -156,13 +150,7 @@
 		[Pizza+4+quesos]
 		[Pollo+al+Ast]
 		[Sopa+de+miso]
-		[Tortilla+de+patatas]
-		[Brownie]
-		[Cheesecake]
-		[Creppe]
-		[Mochi]
-		[Torrijas]
-		[Trufas+de+chocolate])
+		[Tortilla+de+patatas])
 	(disponibilidad Total)
 	(info_generica Carne Caliente Mediterraneo Clasico Moderno)
 	(ingredientes
@@ -308,6 +296,24 @@
 
 ([Gambas+al+ajillo] of  Principal
 
+	(combina_bien
+		[Ensalada]
+		[Falafel]
+		[Gazpacho]
+		[Hamburguesa]
+		[Harira]
+		[Ramen]
+		[Sopa+de+miso]
+		[Sushi]
+		[Brownie]
+		[Cheesecake]
+		[Crema+catalana]
+		[Creppe]
+		[Helado+de+fresa]
+		[Mochi]
+		[Tarta+de+chocolate]
+		[Torrijas]
+		[Trufas+de+chocolate])
 	(disponibilidad Total)
 	(info_generica Caliente Mediterraneo Sibarita Moderno)
 	(ingredientes
@@ -323,6 +329,16 @@
 
 ([Gazpacho] of  Principal
 
+	(combina_bien
+		[Calsotada]
+		[Calsotada]
+		[Falafel]
+		[Gambas+al+ajillo]
+		[Hamburguesa]
+		[Pizza+4+quesos]
+		[Pulpo+a+la+gallega]
+		[Salmon+ahumado]
+		[Tortilla+de+patatas])
 	(disponibilidad Verano)
 	(info_generica Vegetariano Frio Mediterraneo Moderno)
 	(ingredientes
@@ -338,6 +354,17 @@
 
 ([Hamburguesa] of  Principal
 
+	(combina_bien
+		[Calsotada]
+		[Croquetas]
+		[Cuscus]
+		[Ensalada]
+		[Falafel]
+		[Gazpacho]
+		[Harira]
+		[Pizza+4+quesos]
+		[Sopa+de+miso]
+		[Tortilla+de+patatas])
 	(disponibilidad Total)
 	(info_generica Carne Caliente Mediterraneo Moderno Moderno)
 	(ingredientes
@@ -355,6 +382,19 @@
 
 ([Harira] of  Principal
 
+	(combina_bien
+		[Calsotada]
+		[Calsotada]
+		[Cuscus]
+		[Falafel]
+		[Gambas+al+ajillo]
+		[Hamburguesa]
+		[Paella]
+		[Pizza+4+quesos]
+		[Pollo+al+Ast]
+		[Pulpo+a+la+gallega]
+		[Salmon+ahumado]
+		[Tortilla+de+patatas])
 	(disponibilidad Invierno)
 	(info_generica Arabe Caliente Sopa Carne Clasico)
 	(ingredientes
@@ -424,6 +464,14 @@
 
 ([Paella] of  Principal
 
+	(combina_bien
+		[Falafel]
+		[Gambas+al+ajillo]
+		[Hamburguesa]
+		[Pollo+al+Ast]
+		[Pulpo+a+la+gallega]
+		[Salmon+ahumado]
+		[Tortilla+de+patatas])
 	(disponibilidad Total)
 	(info_generica Pescado Caliente Mediterraneo Clasico Moderno)
 	(ingredientes
@@ -460,6 +508,15 @@
 
 ([Pizza+4+quesos] of  Principal
 
+	(combina_bien
+		[Croquetas]
+		[Ensalada]
+		[Falafel]
+		[Gazpacho]
+		[Hamburguesa]
+		[Harira]
+		[Ramen]
+		[Sopa+de+miso])
 	(disponibilidad Total)
 	(info_generica Vegetariano Mediterraneo Clasico)
 	(ingredientes
@@ -482,6 +539,16 @@
 
 ([Pollo+al+Ast] of  Principal
 
+	(combina_bien
+		[Croquetas]
+		[Ensalada]
+		[Falafel]
+		[Gazpacho]
+		[Hamburguesa]
+		[Harira]
+		[Paella]
+		[Ramen]
+		[Sopa+de+miso])
 	(disponibilidad Total)
 	(info_generica Carne Mediterraneo Clasico)
 	(ingredientes
@@ -502,6 +569,16 @@
 
 ([Pulpo+a+la+gallega] of  Principal
 
+	(combina_bien
+		[Ensalada]
+		[Falafel]
+		[Gazpacho]
+		[Hamburguesa]
+		[Harira]
+		[Paella]
+		[Ramen]
+		[Sopa+de+miso]
+		[Sushi])
 	(disponibilidad Verano)
 	(info_generica Pescado Caliente Mediterraneo Sibarita Moderno)
 	(ingredientes
@@ -522,6 +599,15 @@
 
 ([Ramen] of  Principal
 
+	(combina_bien
+		[Gambas+al+ajillo]
+		[Hamburguesa]
+		[Paella]
+		[Pizza+4+quesos]
+		[Pollo+al+Ast]
+		[Pulpo+a+la+gallega]
+		[Salmon+ahumado]
+		[Sushi])
 	(disponibilidad Total)
 	(info_generica Carne Japones Caliente Clasico Moderno)
 	(ingredientes
@@ -546,6 +632,15 @@
 
 ([Salmon+ahumado] of  Principal
 
+	(combina_bien
+		[Ramen]
+		[Croquetas]
+		[Ensalada]
+		[Falafel]
+		[Gazpacho]
+		[Harira]
+		[Ramen]
+		[Sushi])
 	(disponibilidad Total)
 	(info_generica Pescado Japones Moderno Sibarita)
 	(ingredientes
@@ -579,6 +674,17 @@
 
 ([Sopa+de+miso] of  Principal
 
+	(combina_bien
+		[Calsotada]
+		[Gambas+al+ajillo]
+		[Hamburguesa]
+		[Paella]
+		[Pizza+4+quesos]
+		[Pollo+al+Ast]
+		[Pulpo+a+la+gallega]
+		[Salmon+ahumado]
+		[Sushi]
+		[Tortilla+de+patatas])
 	(disponibilidad Total)
 	(info_generica Vegano Japones Caliente Sopa Clasico Vegetariano Vegano)
 	(ingredientes
@@ -592,6 +698,15 @@
 
 ([Sushi] of  Principal
 
+	(combina_bien
+		[Ensalada]
+		[Falafel]
+		[Gambas+al+ajillo]
+		[Paella]
+		[Ramen]
+		[Salmon+ahumado]
+		[Sopa+de+miso]
+		[Tortilla+de+patatas])
 	(disponibilidad Total)
 	(info_generica Pescado Japones Moderno)
 	(ingredientes
@@ -638,6 +753,16 @@
 
 ([Tortilla+de+patatas] of  Principal
 
+	(combina_bien
+		[Croquetas]
+		[Ensalada]
+		[Falafel]
+		[Gazpacho]
+		[Hamburguesa]
+		[Harira]
+		[Ramen]
+		[Sopa+de+miso]
+		[Sushi])
 	(disponibilidad Total)
 	(info_generica Mediterraneo Clasico Vegetariano)
 	(ingredientes
