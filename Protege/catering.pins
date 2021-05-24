@@ -1,4 +1,4 @@
-; Mon May 24 19:20:00 CEST 2021
+; Mon May 24 22:58:34 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 660")
@@ -12,19 +12,6 @@
 
 ([Ajo] of  Ingrediente
 )
-
-([Alfajores] of  Postre
-
-	(disponibilidad Total)
-	(ingredientes
-		[Azucar]
-		[Huevo]
-		[Harina]
-		[Limon]
-		[Mantequilla]
-		[Dulce+de+leche])
-	(precio 4.0)
-	(tiempo_coccion Bajo))
 
 ([Alga+Nori] of  Ingrediente
 )
@@ -71,8 +58,8 @@
 
 ([Calsotada] of  Principal
 
-	(disponibilidad Oto%C3%B1o)
-	(info_generica Vegetariano Caliente Mediterr%C3%A1neo)
+	(disponibilidad Total)
+	(info_generica Vegetariano Caliente Mediterraneo)
 	(ingredientes
 		[Salsa+romesco]
 		[Calsots])
@@ -89,14 +76,18 @@
 ([Carne+picada] of  Ingrediente
 )
 
-([catering_Class93] of  Ingrediente
-)
-
-([catering_Class95] of  Ingrediente
-)
-
 ([Cebolla] of  Ingrediente
 )
+
+([Cheesecake] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Azucar]
+		[Galleta]
+		[Queso])
+	(precio 3.0)
+	(tiempo_coccion Bajo))
 
 ([Chocolate] of  Ingrediente
 )
@@ -111,19 +102,6 @@
 
 	(alcoholica FALSE)
 	(precio 1.25))
-
-([Cocido+de+madrid] of  Principal
-
-	(disponibilidad Total)
-	(info_generica Carne Caliente Sopa Mediterr%C3%A1neo)
-	(ingredientes
-		[Patatas]
-		[Choriozo]
-		[Garbanzos]
-		[Fideos])
-	(papel Segundo)
-	(precio 13.0)
-	(tiempo_coccion Alto))
 
 ([Cordero] of  Ingrediente
 )
@@ -156,10 +134,10 @@
 ([Croquetas] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Carne Caliente Mediterr%C3%A1neo)
+	(info_generica Carne Caliente Mediterraneo)
 	(ingredientes
 		[Carne+picada]
-		[Pan+Rallado]
+		[Pan+rallado]
 		[Bechamel])
 	(papel Primero)
 	(precio 7.0)
@@ -192,7 +170,7 @@
 
 ([Ensalada] of  Principal
 
-	(combina_bien [SalmonAhumado])
+	(combina_bien [Salmon+ahumado])
 	(disponibilidad Total)
 	(info_generica Vegetariano Vegano)
 	(ingredientes
@@ -234,20 +212,6 @@
 ([Fideos+Udon] of  Ingrediente
 )
 
-([Fideua] of  Principal
-
-	(disponibilidad Total)
-	(info_generica Pescado Caliente Mediterr%C3%A1neo)
-	(ingredientes
-		[Calamares]
-		[Caldo+de+pescado]
-		[Cebolla]
-		[Fideos]
-		[Mejillones])
-	(papel Segundo)
-	(precio 15.0)
-	(tiempo_coccion Medio))
-
 ([Fresa] of  Ingrediente
 )
 
@@ -260,7 +224,7 @@
 ([Gambas+al+ajillo] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Caliente Mediterr%C3%A1neo)
+	(info_generica Caliente Mediterraneo)
 	(ingredientes
 		[Ajo]
 		[Perejil]
@@ -275,7 +239,7 @@
 ([Gazpacho] of  Principal
 
 	(disponibilidad Verano)
-	(info_generica Vegetariano Frio Mediterr%C3%A1neo)
+	(info_generica Vegetariano Frio Mediterraneo)
 	(ingredientes
 		[Ajo]
 		[Cebolla]
@@ -286,22 +250,6 @@
 	(papel Primero)
 	(precio 9.0)
 	(tiempo_coccion Bajo))
-
-([Gyoza] of  Principal
-
-	(disponibilidad Total)
-	(info_generica Carne Japon%C3%A9s)
-	(ingredientes
-		[Carne+picada]
-		[Cebolla]
-		[Ajo]
-		[Sal]
-		[Salsa+de+soja]
-		[Huevo]
-		[Harina])
-	(papel Segundo)
-	(precio 7.0)
-	(tiempo_coccion Medio))
 
 ([Hamburguesa] of  Principal
 
@@ -331,11 +279,11 @@
 		[Pimienta]
 		[Cordero]
 		[Garbanzos])
-	(papel Segundo)
+	(papel Primero)
 	(precio 15.0)
 	(tiempo_coccion Alto))
 
-([Helado+de+freasa] of  Postre
+([Helado+de+fresa] of  Postre
 
 	(disponibilidad Total)
 	(ingredientes
@@ -344,30 +292,8 @@
 	(precio 3.0)
 	(tiempo_coccion Bajo))
 
-([Helado+de+limon] of  Postre
-
-	(disponibilidad Total)
-	(ingredientes
-		[Leche]
-		[Limon])
-	(precio 3.0)
-	(tiempo_coccion Bajo))
-
 ([Huevo] of  Ingrediente
 )
-
-([Hummus] of  Principal
-
-	(disponibilidad Total)
-	(info_generica Arabe Vegano)
-	(ingredientes
-		[Garbanzos]
-		[Aceite+de+oliva]
-		[Limon]
-		[Tahini])
-	(papel Primero)
-	(precio 6.0)
-	(tiempo_coccion Bajo))
 
 ([Jengibre] of  Ingrediente
 )
@@ -393,7 +319,7 @@
 ([Mochi] of  Postre
 
 	(disponibilidad Total)
-	(info_generica Japon%C3%A9s Vegano)
+	(info_generica Japones Vegano)
 	(ingredientes [Arroz])
 	(precio 5.0)
 	(tiempo_coccion Bajo))
@@ -414,7 +340,7 @@
 ([Paella] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Pescado Caliente Mediterr%C3%A1neo)
+	(info_generica Pescado Caliente Mediterraneo)
 	(ingredientes
 		[Gambas]
 		[Arroz]
@@ -429,23 +355,11 @@
 ([Pan] of  Ingrediente
 )
 
-([Pan+Rallado] of  Ingrediente
+([Pan+rallado] of  Ingrediente
 )
 
 ([Patatas] of  Ingrediente
 )
-
-([Patatas+Bravas] of  Principal
-
-	(disponibilidad Total)
-	(info_generica Vegetariano Mediterr%C3%A1neo)
-	(ingredientes
-		[Patatas]
-		[Salsa+picante]
-		[Sal])
-	(papel Primero)
-	(precio 6.0)
-	(tiempo_coccion Alto))
 
 ([Pepino] of  Ingrediente
 )
@@ -462,7 +376,7 @@
 ([Pizza+4+quesos] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Vegetariano Mediterr%C3%A1neo)
+	(info_generica Vegetariano Mediterraneo)
 	(ingredientes
 		[Aceite+de+oliva]
 		[Cebolla]
@@ -470,11 +384,11 @@
 		[Harina]
 		[Huevo]
 		[Queso]
-		[Queso+Mascarpone]
+		[Queso+mascarpone]
 		[Tomate]
 		[Perejil]
 		[Oregano])
-	(papel Ambos)
+	(papel Segundo)
 	(precio 9.0)
 	(tiempo_coccion Medio))
 
@@ -484,7 +398,7 @@
 ([Pollo+al+Ast] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Carne Mediterr%C3%A1neo)
+	(info_generica Carne Mediterraneo)
 	(ingredientes
 		[Aceite+de+oliva]
 		[Ajo]
@@ -504,7 +418,7 @@
 ([Pulpo+a+la+gallega] of  Principal
 
 	(disponibilidad Verano)
-	(info_generica Pescado Caliente Mediterr%C3%A1neo)
+	(info_generica Pescado Caliente Mediterraneo)
 	(ingredientes
 		[Ajo]
 		[Cebolla]
@@ -518,13 +432,13 @@
 ([Queso] of  Ingrediente
 )
 
-([Queso+Mascarpone] of  Ingrediente
+([Queso+mascarpone] of  Ingrediente
 )
 
 ([Ramen] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Carne Japon%C3%A9s Caliente)
+	(info_generica Carne Japones Caliente)
 	(ingredientes
 		[Cebolla]
 		[Carne+picada]
@@ -545,7 +459,7 @@
 ([Salmon] of  Ingrediente
 )
 
-([SalmonAhumado] of  Principal
+([Salmon+ahumado] of  Principal
 
 	(disponibilidad Total)
 	(info_generica Pescado)
@@ -581,7 +495,7 @@
 ([Sopa+de+miso] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Vegano Japon%C3%A9s Caliente Sopa)
+	(info_generica Vegano Japones Caliente Sopa)
 	(ingredientes
 		[Soja]
 		[Sal]
@@ -594,7 +508,7 @@
 ([Sushi] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Pescado Japon%C3%A9s)
+	(info_generica Pescado Japones)
 	(ingredientes
 		[Arroz]
 		[Salmon]
@@ -606,7 +520,7 @@
 ([Tahini] of  Ingrediente
 )
 
-([TartaChocolate] of  Postre
+([Tarta+de+chocolate] of  Postre
 
 	(disponibilidad Total)
 	(ingredientes
@@ -616,29 +530,6 @@
 		[Leche]
 		[Mantequilla])
 	(precio 2.5)
-	(tiempo_coccion Bajo))
-
-([TartaQueso] of  Postre
-
-	(disponibilidad Total)
-	(ingredientes
-		[Azucar]
-		[Galleta]
-		[Queso])
-	(precio 3.0)
-	(tiempo_coccion Bajo))
-
-([Tiramisu] of  Postre
-
-	(disponibilidad Total)
-	(ingredientes
-		[Chocolate]
-		[Cacao]
-		[Cafe]
-		[Huevo]
-		[Azucar]
-		[Queso+Mascarpone])
-	(precio 5.0)
 	(tiempo_coccion Bajo))
 
 ([Tofu] of  Ingrediente
@@ -660,10 +551,10 @@
 	(precio 5.0)
 	(tiempo_coccion Medio))
 
-([Tortilla+De+patatas] of  Principal
+([Tortilla+de+patatas] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Mediterr%C3%A1neo)
+	(info_generica Mediterraneo)
 	(ingredientes
 		[Cebolla]
 		[Patatas]
@@ -672,7 +563,7 @@
 	(precio 7.0)
 	(tiempo_coccion Medio))
 
-([Trufas+de+Chocolate] of  Postre
+([Trufas+de+chocolate] of  Postre
 
 	(disponibilidad Total)
 	(ingredientes
@@ -680,29 +571,15 @@
 		[Chocolate]
 		[Nata])
 	(precio 2.0)
-	(tiempo_coccion Bajo))
-
-([Udon] of  Principal
-
-	(disponibilidad Total)
-	(info_generica Carne Japon%C3%A9s Caliente)
-	(ingredientes
-		[Cebolla]
-		[Carne+picada]
-		[Huevo]
-		[Setas]
-		[Fideos+Udon])
-	(papel Primero)
-	(precio 10.0)
 	(tiempo_coccion Medio))
 
-([VinoBlanco] of  Bebida
+([Vino+Blanco] of  Bebida
 
 	(alcoholica TRUE)
-	(combina_bien [SalmonAhumado])
+	(combina_bien [Salmon+ahumado])
 	(precio 3.0))
 
-([VinoTinto] of  Bebida
+([Vino+Tinto] of  Bebida
 
 	(alcoholica TRUE)
 	(precio 3.0))

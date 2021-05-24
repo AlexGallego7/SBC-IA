@@ -1,4 +1,4 @@
-; Mon May 24 19:20:00 CEST 2021
+; Mon May 24 22:58:34 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 660")
@@ -21,11 +21,6 @@
 ;+		(comment "Bebida asociada al plato / menú")
 		(type INSTANCE)
 ;+		(allowed-classes Bebida)
-		(create-accessor read-write))
-	(single-slot bebidas_acoholicas
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot bebida_por_plato
 		(type SYMBOL)
@@ -60,6 +55,11 @@
 		(allowed-values vegana vegetariana)
 		(cardinality 0 2)
 		(create-accessor read-write))
+	(single-slot bebidas_alcoholicas
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot min_price
 ;+		(comment "Precio mínimo del menu")
 		(type INTEGER)
@@ -83,7 +83,7 @@
 	(multislot info_generica
 ;+		(comment "Información genérica del plato")
 		(type SYMBOL)
-		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterr%C3%A1neo Japon%C3%A9s)
+		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterraneo Japones)
 		(create-accessor read-write))
 	(multislot combina_bien
 ;+		(comment "Indica los platos con cuales combina bien.")
@@ -125,13 +125,13 @@
 	(single-slot disponibilidad
 ;+		(comment "Disponibilidad del ingrediente/plato durante el año")
 		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno Total)
+		(allowed-values Primavera Verano Otono Invierno Total)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot epoca
 ;+		(comment "Epoca del año en la que se celebra el evento")
 		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno)
+		(allowed-values Primavera Verano Otono Invierno)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot comensales
@@ -172,7 +172,7 @@
 	(single-slot epoca
 ;+		(comment "Epoca del año en la que se celebra el evento")
 		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno)
+		(allowed-values Primavera Verano Otono Invierno)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -199,15 +199,15 @@
 		(allowed-values vegana vegetariana)
 		(cardinality 0 2)
 		(create-accessor read-write))
-	(single-slot bebidas_acoholicas
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(multislot ingredientes_prohibidos
 ;+		(comment "Ingredientes prohibidos")
 		(type INSTANCE)
 ;+		(allowed-classes Ingrediente)
+		(create-accessor read-write))
+	(single-slot bebidas_alcoholicas
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot bebida_por_plato
 		(type SYMBOL)
@@ -259,7 +259,7 @@
 	(multislot info_generica
 ;+		(comment "Información genérica del plato")
 		(type SYMBOL)
-		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterr%C3%A1neo Japon%C3%A9s)
+		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterraneo Japones)
 		(create-accessor read-write))
 	(single-slot precio
 ;+		(comment "Precio del plato")
@@ -294,7 +294,7 @@
 	(single-slot disponibilidad
 ;+		(comment "Disponibilidad del ingrediente/plato durante el año")
 		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno Total)
+		(allowed-values Primavera Verano Otono Invierno Total)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 

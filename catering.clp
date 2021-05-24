@@ -1,4 +1,4 @@
-; Sun May 23 19:48:44 CEST 2021
+; Mon May 24 22:28:32 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 660")
@@ -21,11 +21,6 @@
 ;+		(comment "Bebida asociada al plato / menú")
 		(type INSTANCE)
 ;+		(allowed-classes Bebida)
-		(create-accessor read-write))
-	(single-slot bebidas_acoholicas
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot bebida_por_plato
 		(type SYMBOL)
@@ -60,6 +55,11 @@
 		(allowed-values vegana vegetariana)
 		(cardinality 0 2)
 		(create-accessor read-write))
+	(single-slot bebidas_alcoholicas
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot min_price
 ;+		(comment "Precio mínimo del menu")
 		(type INTEGER)
@@ -83,7 +83,7 @@
 	(multislot info_generica
 ;+		(comment "Información genérica del plato")
 		(type SYMBOL)
-		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterr%C3%A1neo Japon%C3%A9s)
+		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterraneo Japones)
 		(create-accessor read-write))
 	(multislot combina_bien
 ;+		(comment "Indica los platos con cuales combina bien.")
@@ -125,13 +125,13 @@
 	(single-slot disponibilidad
 ;+		(comment "Disponibilidad del ingrediente/plato durante el año")
 		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno Total)
+		(allowed-values Primavera Verano Otono Invierno Total)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot epoca
 ;+		(comment "Epoca del año en la que se celebra el evento")
 		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno)
+		(allowed-values Primavera Verano Otono Invierno)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot comensales
@@ -172,7 +172,7 @@
 	(single-slot epoca
 ;+		(comment "Epoca del año en la que se celebra el evento")
 		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno)
+		(allowed-values Primavera Verano Otono Invierno)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -199,15 +199,15 @@
 		(allowed-values vegana vegetariana)
 		(cardinality 0 2)
 		(create-accessor read-write))
-	(single-slot bebidas_acoholicas
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(multislot ingredientes_prohibidos
 ;+		(comment "Ingredientes prohibidos")
 		(type INSTANCE)
 ;+		(allowed-classes Ingrediente)
+		(create-accessor read-write))
+	(single-slot bebidas_alcoholicas
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot bebida_por_plato
 		(type SYMBOL)
@@ -259,7 +259,7 @@
 	(multislot info_generica
 ;+		(comment "Información genérica del plato")
 		(type SYMBOL)
-		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterr%C3%A1neo Japon%C3%A9s)
+		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterraneo Japones)
 		(create-accessor read-write))
 	(single-slot precio
 ;+		(comment "Precio del plato")
@@ -294,7 +294,7 @@
 	(single-slot disponibilidad
 ;+		(comment "Disponibilidad del ingrediente/plato durante el año")
 		(type SYMBOL)
-		(allowed-values Primavera Verano Oto%C3%B1o Invierno Total)
+		(allowed-values Primavera Verano Otono Invierno Total)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -311,8 +311,8 @@
 
 (defclass Postre "Información sobre el postre"
 	(is-a Plato)
-	(role concrete)
-	(pattern-match reactive))
+	(pattern-match reactive)
+	(role concrete))
 
 (defclass Bebida "Información sobre la bebida"
 	(is-a USER)
@@ -358,10 +358,112 @@
 		
 (definstances Instancias
 
+([Aceite+de+oliva] of  Ingrediente
+)
+
+([Agua] of  Bebida
+
+	(precio 1.0))
+
+([Ajo] of  Ingrediente
+)
+
+([Alfajores] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Azucar]
+		[Huevo]
+		[Harina]
+		[Limon]
+		[Mantequilla]
+		[Dulce+de+leche])
+	(precio 4.0)
+	(tiempo_coccion Bajo))
+
+([Alga+Nori] of  Ingrediente
+)
+
+([Arroz] of  Ingrediente
+)
+
 ([Azucar] of  Ingrediente
 )
 
+([Bacalao] of  Ingrediente
+)
+
+([Bechamel] of  Ingrediente
+)
+
+([Brownie] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Galleta]
+		[Harina]
+		[Huevo]
+		[Leche]
+		[Mantequilla]
+		[Nata])
+	(precio 6.0)
+	(tiempo_coccion Medio))
+
+([Cacao] of  Ingrediente
+)
+
+([Cafe] of  Ingrediente
+)
+
+([Calamares] of  Ingrediente
+)
+
+([Caldo+de+carne] of  Ingrediente
+)
+
+([Caldo+de+pescado] of  Ingrediente
+)
+
+([Calsotada] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Vegetariano Caliente Mediterraneo)
+	(ingredientes
+		[Salsa+romesco]
+		[Calsots])
+	(papel Segundo)
+	(precio 17.0)
+	(tiempo_coccion Medio))
+
+([Calsots] of  Ingrediente
+)
+
+([Canela] of  Ingrediente
+)
+
+([Carne+picada] of  Ingrediente
+)
+
+([Cebolla] of  Ingrediente
+)
+
+([Cheesecake] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Azucar]
+		[Galleta]
+		[Queso])
+	(precio 3.0)
+	(tiempo_coccion Bajo))
+
 ([Chocolate] of  Ingrediente
+)
+
+([Choriozo] of  Ingrediente
+)
+
+([Cilantro] of  Ingrediente
 )
 
 ([CocaCola] of  Bebida
@@ -369,12 +471,87 @@
 	(alcoholica FALSE)
 	(precio 1.25))
 
+([Cocido+de+madrid] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Carne Caliente Sopa Mediterraneo)
+	(ingredientes
+		[Patatas]
+		[Choriozo]
+		[Garbanzos]
+		[Fideos])
+	(papel Segundo)
+	(precio 13.0)
+	(tiempo_coccion Alto))
+
 ([Cordero] of  Ingrediente
+)
+
+([Crema+catalana] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Azucar]
+		[Huevo]
+		[Leche]
+		[Limon]
+		[Canela])
+	(precio 6.0)
+	(tiempo_coccion Medio))
+
+([Creppe] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Azucar]
+		[Chocolate]
+		[Harina]
+		[Huevo]
+		[Leche]
+		[Mantequilla])
+	(precio 7.0)
+	(tiempo_coccion Medio))
+
+([Croquetas] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Carne Caliente Mediterraneo)
+	(ingredientes
+		[Carne+picada]
+		[Pan+rallado]
+		[Bechamel])
+	(papel Primero)
+	(precio 7.0)
+	(tiempo_coccion Alto))
+
+([Curry] of  Ingrediente
+)
+
+([Cuscus] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Arabe)
+	(ingredientes
+		[Semola]
+		[Caldo+de+carne]
+		[Zanahoria]
+		[Lechuga]
+		[Garbanzos]
+		[Cebolla]
+		[Aceite+de+oliva])
+	(papel Segundo)
+	(precio 15.0)
+	(tiempo_coccion Alto))
+
+([Datiles] of  Ingrediente
+)
+
+([Dulce+de+leche] of  Ingrediente
 )
 
 ([Ensalada] of  Principal
 
-	(combina_bien [SalmonAhumado])
+	(combina_bien [Salmon+ahumado])
 	(disponibilidad Total)
 	(info_generica Vegetariano Vegano)
 	(ingredientes
@@ -388,15 +565,170 @@
 ([Esparrago] of  Ingrediente
 )
 
+([Falafel] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Arabe Vegano)
+	(ingredientes
+		[Salsa+de+yogur]
+		[Garbanzos]
+		[Curry]
+		[Ajo]
+		[Perejil])
+	(papel Ambos)
+	(precio 7.0)
+	(tiempo_coccion Medio))
+
 ([Fanta] of  Bebida
 
 	(alcoholica FALSE)
 	(precio 1.25))
 
+([Fideos] of  Ingrediente
+)
+
+([Fideos+Ramen] of  Ingrediente
+)
+
+([Fideos+Udon] of  Ingrediente
+)
+
+([Fideua] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Pescado Caliente Mediterraneo)
+	(ingredientes
+		[Calamares]
+		[Caldo+de+pescado]
+		[Cebolla]
+		[Fideos]
+		[Mejillones])
+	(papel Segundo)
+	(precio 15.0)
+	(tiempo_coccion Medio))
+
 ([Fresa] of  Ingrediente
 )
 
 ([Galleta] of  Ingrediente
+)
+
+([Gambas] of  Ingrediente
+)
+
+([Gambas+al+ajillo] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Caliente Mediterraneo)
+	(ingredientes
+		[Ajo]
+		[Perejil]
+		[Gambas])
+	(papel Segundo)
+	(precio 8.0)
+	(tiempo_coccion Medio))
+
+([Garbanzos] of  Ingrediente
+)
+
+([Gazpacho] of  Principal
+
+	(disponibilidad Verano)
+	(info_generica Vegetariano Frio Mediterraneo)
+	(ingredientes
+		[Ajo]
+		[Cebolla]
+		[Pepino]
+		[Sal]
+		[Zanahoria]
+		[Tomate])
+	(papel Primero)
+	(precio 9.0)
+	(tiempo_coccion Bajo))
+
+([Gyoza] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Carne Japones)
+	(ingredientes
+		[Carne+picada]
+		[Cebolla]
+		[Ajo]
+		[Sal]
+		[Salsa+de+soja]
+		[Huevo]
+		[Harina])
+	(papel Segundo)
+	(precio 7.0)
+	(tiempo_coccion Medio))
+
+([Hamburguesa] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Carne Caliente)
+	(ingredientes
+		[Queso]
+		[Lechuga]
+		[Pepino]
+		[Huevo]
+		[Carne+picada])
+	(papel Ambos)
+	(precio 7.0)
+	(tiempo_coccion Medio))
+
+([Harina] of  Ingrediente
+)
+
+([Harira] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Arabe Caliente Sopa Carne)
+	(ingredientes
+		[Cilantro]
+		[Jengibre]
+		[Datiles]
+		[Pimienta]
+		[Cordero]
+		[Garbanzos])
+	(papel Segundo)
+	(precio 15.0)
+	(tiempo_coccion Alto))
+
+([Helado+de+freasa] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Fresa]
+		[Leche])
+	(precio 3.0)
+	(tiempo_coccion Bajo))
+
+([Helado+de+limon] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Leche]
+		[Limon])
+	(precio 3.0)
+	(tiempo_coccion Bajo))
+
+([Huevo] of  Ingrediente
+)
+
+([Hummus] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Arabe Vegano)
+	(ingredientes
+		[Garbanzos]
+		[Aceite+de+oliva]
+		[Limon]
+		[Tahini])
+	(papel Primero)
+	(precio 6.0)
+	(tiempo_coccion Bajo))
+
+([Jengibre] of  Ingrediente
 )
 
 ([Leche] of  Ingrediente
@@ -411,17 +743,157 @@
 ([Mantequilla] of  Ingrediente
 )
 
+([Mejillones] of  Ingrediente
+)
+
 ([Melon] of  Ingrediente
 )
+
+([Mochi] of  Postre
+
+	(disponibilidad Total)
+	(info_generica Japones Vegano)
+	(ingredientes [Arroz])
+	(precio 5.0)
+	(tiempo_coccion Bajo))
 
 ([Naranja] of  Ingrediente
 )
 
+([Nata] of  Ingrediente
+)
+
+([Nestea] of  Bebida
+
+	(precio 1.25))
+
+([Oregano] of  Ingrediente
+)
+
+([Paella] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Pescado Caliente Mediterraneo)
+	(ingredientes
+		[Gambas]
+		[Arroz]
+		[Calamares]
+		[Pimenton]
+		[Caldo+de+pescado]
+		[Mejillones])
+	(papel Ambos)
+	(precio 15.0)
+	(tiempo_coccion Medio))
+
+([Pan] of  Ingrediente
+)
+
+([Pan+rallado] of  Ingrediente
+)
+
+([Patatas] of  Ingrediente
+)
+
+([Patatas+bravas] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Vegetariano Mediterraneo)
+	(ingredientes
+		[Patatas]
+		[Salsa+picante]
+		[Sal])
+	(papel Primero)
+	(precio 6.0)
+	(tiempo_coccion Alto))
+
 ([Pepino] of  Ingrediente
 )
 
+([Perejil] of  Ingrediente
+)
+
+([Pimenton] of  Ingrediente
+)
+
+([Pimienta] of  Ingrediente
+)
+
+([Pizza+4+quesos] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Vegetariano Mediterraneo)
+	(ingredientes
+		[Aceite+de+oliva]
+		[Cebolla]
+		[Cilantro]
+		[Harina]
+		[Huevo]
+		[Queso]
+		[Queso+mascarpone]
+		[Tomate]
+		[Perejil]
+		[Oregano])
+	(papel Ambos)
+	(precio 9.0)
+	(tiempo_coccion Medio))
+
+([Pollo] of  Ingrediente
+)
+
+([Pollo+al+Ast] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Carne Mediterraneo)
+	(ingredientes
+		[Aceite+de+oliva]
+		[Ajo]
+		[Cebolla]
+		[Oregano]
+		[Perejil]
+		[Pimienta]
+		[Sal]
+		[Pollo])
+	(papel Segundo)
+	(precio 14.0)
+	(tiempo_coccion Alto))
+
+([Pulpo] of  Ingrediente
+)
+
+([Pulpo+a+la+gallega] of  Principal
+
+	(disponibilidad Verano)
+	(info_generica Pescado Caliente Mediterraneo)
+	(ingredientes
+		[Ajo]
+		[Cebolla]
+		[Pimenton]
+		[Pulpo]
+		[Patatas])
+	(papel Segundo)
+	(precio 17.0)
+	(tiempo_coccion Alto))
+
 ([Queso] of  Ingrediente
 )
+
+([Queso+mascarpone] of  Ingrediente
+)
+
+([Ramen] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Carne Japones Caliente)
+	(ingredientes
+		[Cebolla]
+		[Carne+picada]
+		[Lechuga]
+		[Huevo]
+		[Sal]
+		[Fideos+Ramen])
+	(papel Primero)
+	(precio 10.0)
+	(tiempo_coccion Medio))
 
 ([Remolacha] of  Ingrediente
 )
@@ -432,7 +904,7 @@
 ([Salmon] of  Ingrediente
 )
 
-([SalmonAhumado] of  Principal
+([Salmon+ahumado] of  Principal
 
 	(disponibilidad Total)
 	(info_generica Pescado)
@@ -444,7 +916,56 @@
 	(precio 7.0)
 	(tiempo_coccion Alto))
 
-([TartaChocolate] of  Postre
+([Salsa+de+soja] of  Ingrediente
+)
+
+([Salsa+de+yogur] of  Ingrediente
+)
+
+([Salsa+picante] of  Ingrediente
+)
+
+([Salsa+romesco] of  Ingrediente
+)
+
+([Semola] of  Ingrediente
+)
+
+([Setas] of  Ingrediente
+)
+
+([Soja] of  Ingrediente
+)
+
+([Sopa+de+miso] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Vegano Japones Caliente Sopa)
+	(ingredientes
+		[Soja]
+		[Sal]
+		[Cebolla]
+		[Tofu])
+	(papel Primero)
+	(precio 7.0)
+	(tiempo_coccion Medio))
+
+([Sushi] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Pescado Japones)
+	(ingredientes
+		[Arroz]
+		[Salmon]
+		[Alga+Nori])
+	(papel Ambos)
+	(precio 15.0)
+	(tiempo_coccion Medio))
+
+([Tahini] of  Ingrediente
+)
+
+([Tarta+de+chocolate] of  Postre
 
 	(disponibilidad Total)
 	(ingredientes
@@ -456,29 +977,88 @@
 	(precio 2.5)
 	(tiempo_coccion Bajo))
 
-([TartaQueso] of  Postre
+([Tiramisu] of  Postre
 
 	(disponibilidad Total)
 	(ingredientes
+		[Chocolate]
+		[Cacao]
+		[Cafe]
+		[Huevo]
 		[Azucar]
-		[Galleta]
-		[Queso])
-	(precio 3.0)
+		[Queso+mascarpone])
+	(precio 5.0)
 	(tiempo_coccion Bajo))
 
-([VinoBlanco] of  Bebida
+([Tofu] of  Ingrediente
+)
+
+([Tomate] of  Ingrediente
+)
+
+([Torrijas] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Aceite+de+oliva]
+		[Azucar]
+		[Huevo]
+		[Leche]
+		[Mantequilla]
+		[Pan])
+	(precio 5.0)
+	(tiempo_coccion Medio))
+
+([Tortilla+de+patatas] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Mediterraneo)
+	(ingredientes
+		[Cebolla]
+		[Patatas]
+		[Huevo])
+	(papel Ambos)
+	(precio 7.0)
+	(tiempo_coccion Medio))
+
+([Trufas+de+chocolate] of  Postre
+
+	(disponibilidad Total)
+	(ingredientes
+		[Mantequilla]
+		[Chocolate]
+		[Nata])
+	(precio 2.0)
+	(tiempo_coccion Bajo))
+
+([Udon] of  Principal
+
+	(disponibilidad Total)
+	(info_generica Carne Caliente Japones)
+	(ingredientes
+		[Cebolla]
+		[Carne+picada]
+		[Huevo]
+		[Setas]
+		[Fideos+Udon])
+	(papel Primero)
+	(precio 10.0)
+	(tiempo_coccion Medio))
+
+([Vino+Blanco] of  Bebida
 
 	(alcoholica TRUE)
-	(combina_bien [SalmonAhumado])
+	(combina_bien [Salmon+ahumado])
 	(precio 3.0))
 
-([VinoTinto] of  Bebida
+([Vino+Tinto] of  Bebida
 
 	(alcoholica TRUE)
 	(precio 3.0))
 
 ([Zanahoria] of  Ingrediente)
 )
+
 
 ;; ----------------------
 ;; DECLARACION DE MODULOS
@@ -552,7 +1132,7 @@
 (deftemplate MAIN::datos-restricciones
     (slot precio_max (type INTEGER) (default -1))
     (slot precio_min (type INTEGER) (default -1))
-	(slot alcohol (type STRING) (default "Yes"))
+	(slot alcohol (type STRING) (default "None"))
 	(slot dieta (type STRING) (default "None"))
     (multislot ingredientes_prohibidos (type STRING))
     
@@ -625,7 +1205,7 @@
 	(printout t "!Bienvenido! A continuacion se le formularan una serie de" crlf)
 	(printout t "preguntas para recomendarle una serie de menus." crlf)
 	(printout t crlf)
-	(focus recopilacion-restricciones)
+	(focus recopilacion-datos-evento)
 )
 
 ;; 			------
@@ -779,6 +1359,21 @@
     (modify ?g (dieta ?dieta))
 )
 
+(defrule recopilacion-restricciones::alcohol "Indica si se quiere bebida alcoholica"
+	?p <- (datos-evento (tipo ?tipo))
+    ?g <- (datos-restricciones (alcohol ?alcohol))
+    (test (and (neq ?tipo "Infantil") (eq ?alcohol "None")))
+    =>
+    (bind ?valores (create$ "Si" "No"))
+    (bind ?r (pregunta-symbol "¿Quiere usted bebida alcoholica?" ?valores))
+    (printout t crlf)
+    
+    (if (= ?r 1) then (bind ?x "Si"))
+    (if (= ?r 2) then (bind ?x "No"))
+    
+    (modify ?g (alcohol ?x))
+)
+
 (defrule recopilacion-restricciones::establecer_prohibidos "Indica los ingredientes prohibidos"
     ?g <- (datos-restricciones (ingredientes_prohibidos $?ingredientes_prohibidos))
     (test (eq 0 (length$ $?ingredientes_prohibidos)))
@@ -789,7 +1384,7 @@
 )
 
 (defrule recopilacion-restricciones::pasar-rec-sugerencia "Pasar a recopilacion de restricciones"
-    (declare (salience -1))
+    (declare (salience -2))
     =>
     (focus procesar-datos)
 )
@@ -818,7 +1413,7 @@
 	(if (>= 100 ?p_max) then (bind ?tipo Lujoso))
 
 	(assert (abstracciones (abs_precio ?tipo)))
-	(focus generacion-soluciones)
+	(focus seleccion)
 )
 
 ;;(defrule procesar-datos::abstraer_valoracion_plato "Abstraccion del la valoracion de los platos"
@@ -829,6 +1424,74 @@
 ;;			(bind ?plato_epoca (send (nth$ ?i $?platos) get-epoca)))
 ;;)
 	
+;; 			------
+;; 				REGLAS DEL MÓDULO "SELECCION"
+;;			------
+
+(defrule seleccion::eliminar-platos-caros "Elimina los platos caros"
+	?d <- (datos-restricciones (precio_max ?p_max))
+	?s <- (object (is-a Plato) (precio ?precio))
+	(test (> ?precio ?p_max))
+    =>
+	(send ?s delete)
+)
+
+(defrule seleccion::eliminar-bebidas-caras "Elimina las bebidas caras"
+	?d <- (datos-restricciones (precio_max ?p_max))
+	?s <- (object (is-a Bebida) (precio ?precio))
+	(test (> ?precio ?p_max))
+    =>
+	(send ?s delete)
+)
+
+(defrule seleccion::eliminar-bebidas-alcoholicas "Elimina las bebidas alcoholicas en caso de no querer-las"
+	?d <- (datos-restricciones (alcohol ?alcohol))
+	?s <- (object (is-a Bebida) (alcoholica ?alcoholica))
+	(test (and (or (eq ?alcohol "No") (eq ?alcohol "None")) (eq ?alcoholica TRUE)))
+    =>
+	(send ?s delete)
+)
+
+(defrule seleccion::eliminar-platos-no-vegetarianos"Elimina los platos que no son vegetarianos"
+	?d <- (datos-restricciones (dieta ?dieta))
+	?s <- (object (is-a Plato) (info_generica $?info_generica))
+	(test (eq ?dieta "Vegetariana" ))
+    =>
+	(if (not (member$ Vegetariano $?info_generica)) then (send ?s delete))
+)
+
+(defrule seleccion::eliminar-platos-no-veganos "Elimina los platos que no son veganos"
+	?d <- (datos-restricciones (dieta ?dieta))
+	?s <- (object (is-a Plato) (info_generica $?info_generica))
+	(test (eq ?dieta "Vegana" ))
+    =>
+	(if (not (member$ Vegano $?info_generica)) then (send ?s delete))
+)
+
+(defrule seleccion::seleccion-platos-por-ingredientes "Selecciona los sin ingredientes prohibidos"
+	(declare (salience -1))
+    ?d <- (datos-restricciones (ingredientes_prohibidos $?ing_prohibidos))
+	?s <- (object (is-a Plato) (ingredientes $?ingredientes))
+    => 
+	(bind ?cond FALSE)
+	(bind ?i 1)
+	
+	(while (and (not ?cond) (<= ?i (length$ $?ing_prohibidos))) do
+        
+		(if (member$ (symbol-to-instance-name (nth$ ?i $?ing_prohibidos)) $?ingredientes)
+            then 
+				(bind ?cond TRUE)
+				(send ?s delete)
+		)
+        (bind ?i (+ ?i 1))
+	)
+)
+
+(defrule seleccion::pasar-a-generacion-soluciones "Pasar a la generacion de menus"
+    (declare (salience -2))
+    =>
+    (focus generacion-soluciones)
+)
 
 ;; 			------
 ;; 				REGLAS DEL MÓDULO "GENERA-SOLUCIONES"
@@ -845,18 +1508,9 @@
 	(bind ?precio (+ (+ (+ (send ?primero get-precio) (send ?segundo get-precio))(send ?postre get-precio)) (send ?bebida get-precio)))  
 	(assert (sugerencia-menu (primero ?primero) (segundo ?segundo) (postre ?postre) (bebida ?bebida) (precio ?precio)))
 )
-		
-(defrule generacion-soluciones::pasar-resultados "Pasar a la muestra de resultados"
-    (declare (salience -1))
-    =>
-    (focus seleccion)
-)
 
-;; 			------
-;; 				REGLAS DEL MÓDULO "SELECCION"
-;;			------
-
-(defrule seleccion::seleccion-platos-por-precio "Selecciona los platos dentro del rango de precio"
+(defrule generacion-soluciones::seleccion-platos-por-precio "Selecciona los platos dentro del rango de precio"
+	(declare (salience -1))
     ?s <- (sugerencia-menu (precio ?precio))
 	?p <- (datos-restricciones (precio_min ?p_min) (precio_max ?p_max))
 	(test (or (> ?precio ?p_max) (< ?precio ?p_min)))
@@ -864,41 +1518,13 @@
 	(printout t "se va a eliminar esta sugerencia " ?s " debido a su precio del " ?precio crlf)
 	(retract ?s)
 )
-
-(defrule seleccion::seleccion-platos-por-ingredientes "Selecciona los sin ingredientes prohibidos"
-    ?d <- (datos-restricciones (ingredientes_prohibidos $?ing_prohibidos))
-	?s <- (sugerencia-menu (primero ?primero) (segundo ?segundo) (postre ?postre) (precio ?precio))
-    => 
-	(bind ?ings_primero (send ?primero get-ingredientes))
-	(bind ?ings_segundo (send ?segundo get-ingredientes))
-	(bind ?ings_postre (send ?postre get-ingredientes))
-	(bind ?cond FALSE)
-	(bind ?i 1)
-	
-	(while (and (not ?cond) (<= ?i (length$ $?ing_prohibidos))) do
-        
-		(if (member$ (sym-cat "[" (nth$ ?i $?ing_prohibidos) "]") ?ings_primero) 
-            then 
-                (printout t "llego1" clrf)
-				(bind ?cond TRUE)
-			else 
-                (if (member$ (sym-cat "[" (nth$ ?i $?ing_prohibidos) "]") ?ings_segundo) 
-					then 
-                        (printout t "llego2" clrf)
-						(bind ?cond TRUE)
-					else 
-						(if (member$ (sym-cat "[" (nth$ ?i $?ing_prohibidos) "]") ?ings_postre) 
-							then 
-                                (printout t "llego3" clrf)
-								(bind ?cond TRUE))))
-        (bind ?i (+ ?i 1))
-	)
-	(if ?cond
-        then 
-            (printout t "se va a eliminar esta sugerencia " ?s " debido a un ingrediente" crlf)
-            (retract ?s))
-	
+		
+(defrule generacion-soluciones::pasar-resultados "Pasar a la muestra de resultados"
+    (declare (salience -2))
+    =>
+    (focus resultados)
 )
+
 
 ;; 			------
 ;; 				REGLAS DEL MÓDULO "RESULTADOS"
@@ -907,7 +1533,5 @@
 (defrule resultados::pasar-resultados "Pasar a la muestra de resultados"
     ?s <- (sugerencia-menu)
     =>
-    
 )
-
 

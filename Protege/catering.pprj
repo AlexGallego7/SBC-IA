@@ -1,4 +1,4 @@
-; Mon May 24 19:20:00 CEST 2021
+; Mon May 24 22:58:35 CEST 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 660")
@@ -21,10 +21,10 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[catering_ProjectKB_Class30084]
-		[catering_ProjectKB_Class30085]
-		[catering_ProjectKB_Class30086]
-		[catering_ProjectKB_Class30087]))
+		[catering_ProjectKB_Class31109]
+		[catering_ProjectKB_Class31110]
+		[catering_ProjectKB_Class31111]
+		[catering_ProjectKB_Class31112]))
 
 ([catering_ProjectKB_Class1] of  Widget
 
@@ -319,62 +319,86 @@
 ([catering_ProjectKB_Class30] of  Property_List
 )
 
-([catering_ProjectKB_Class30084] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([catering_ProjectKB_Class30085] of  String
-
-	(name "Evento")
-	(string_value "epoca"))
-
-([catering_ProjectKB_Class30086] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([catering_ProjectKB_Class30087] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([catering_ProjectKB_Class30088] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([catering_ProjectKB_Class30089] of  Map
+([catering_ProjectKB_Class30255] of  Property_List
 )
 
-([catering_ProjectKB_Class30090] of  Map_Entry
+([catering_ProjectKB_Class30308] of  Property_List
+)
 
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "catering_ProjectKB_Class30089")
-	(value_class "java.util.Map"))
+([catering_ProjectKB_Class30473] of  Property_List
+)
 
-([catering_ProjectKB_Class30091] of  Map_Entry
+([catering_ProjectKB_Class30526] of  Property_List
+)
 
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "true")
-	(value_class "java.lang.String"))
+([catering_ProjectKB_Class30691] of  Property_List
+)
 
-([catering_ProjectKB_Class30092] of  Map_Entry
+([catering_ProjectKB_Class30744] of  Property_List
+)
 
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
+([catering_ProjectKB_Class30954] of  Property_List
+)
 
 ([catering_ProjectKB_Class31] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [catering_ProjectKB_Class32])
 	(widget_class_name "edu.stanford.smi.protegex.owl.swrl.ui.tab.SWRLTab"))
+
+([catering_ProjectKB_Class31007] of  Property_List
+)
+
+([catering_ProjectKB_Class31109] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([catering_ProjectKB_Class31110] of  String
+
+	(name "Evento")
+	(string_value "epoca"))
+
+([catering_ProjectKB_Class31111] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([catering_ProjectKB_Class31112] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([catering_ProjectKB_Class31113] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([catering_ProjectKB_Class31114] of  Map
+)
+
+([catering_ProjectKB_Class31115] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "catering_ProjectKB_Class31114")
+	(value_class "java.util.Map"))
+
+([catering_ProjectKB_Class31116] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "true")
+	(value_class "java.lang.String"))
+
+([catering_ProjectKB_Class31117] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([catering_ProjectKB_Class32] of  Property_List
 )
@@ -736,11 +760,11 @@
 ([KB_051431_Class1] of  Map
 
 	(entries
-		[catering_ProjectKB_Class30088]
-		[catering_ProjectKB_Class30090]
-		[catering_ProjectKB_Class30091]
-		[catering_ProjectKB_Class30092])
-	(referenced_maps [catering_ProjectKB_Class30089]))
+		[catering_ProjectKB_Class31113]
+		[catering_ProjectKB_Class31115]
+		[catering_ProjectKB_Class31116]
+		[catering_ProjectKB_Class31117])
+	(referenced_maps [catering_ProjectKB_Class31114]))
 
 ([KB_051431_Class124] of  String
 
@@ -834,7 +858,7 @@
 
 	(properties [catering_ProjectKB_Class126]))
 
-([KB_167746_Class5] of  Map
+([KB_446276_Class5] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
