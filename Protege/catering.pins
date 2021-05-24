@@ -1,7 +1,7 @@
-; Mon May 24 22:58:34 CEST 2021
+; Mon May 24 23:45:09 CEST 2021
 ; 
 ;+ (version "3.5")
-;+ (build "Build 660")
+;+ (build "Build 663")
 
 ([Aceite+de+oliva] of  Ingrediente
 )
@@ -58,8 +58,22 @@
 
 ([Calsotada] of  Principal
 
+	(combina_bien
+		[Croquetas]
+		[Falafel]
+		[Gazpacho]
+		[Hamburguesa]
+		[Harira]
+		[Pollo+al+Ast]
+		[Sopa+de+miso]
+		[Tortilla+de+patatas]
+		[Brownie]
+		[Crema+catalana]
+		[Helado+de+fresa]
+		[Tarta+de+chocolate]
+		[Trufas+de+chocolate])
 	(disponibilidad Total)
-	(info_generica Vegetariano Caliente Mediterraneo)
+	(info_generica Vegetariano Caliente Mediterraneo Clasico Vegano)
 	(ingredientes
 		[Salsa+romesco]
 		[Calsots])
@@ -133,23 +147,56 @@
 
 ([Croquetas] of  Principal
 
+	(combina_bien
+		[Calsotada]
+		[Ensalada]
+		[Gazpacho]
+		[Hamburguesa]
+		[Harira]
+		[Pizza+4+quesos]
+		[Pollo+al+Ast]
+		[Sopa+de+miso]
+		[Tortilla+de+patatas]
+		[Brownie]
+		[Cheesecake]
+		[Creppe]
+		[Mochi]
+		[Torrijas]
+		[Trufas+de+chocolate])
 	(disponibilidad Total)
-	(info_generica Carne Caliente Mediterraneo)
+	(info_generica Carne Caliente Mediterraneo Clasico Moderno)
 	(ingredientes
 		[Carne+picada]
 		[Pan+rallado]
 		[Bechamel])
 	(papel Primero)
 	(precio 7.0)
-	(tiempo_coccion Alto))
+	(tiempo_coccion Medio))
 
 ([Curry] of  Ingrediente
 )
 
 ([Cuscus] of  Principal
 
+	(combina_bien
+		[Hamburguesa]
+		[Ensalada]
+		[Gambas+al+ajillo]
+		[Hamburguesa]
+		[Harira]
+		[Pollo+al+Ast]
+		[Pulpo+a+la+gallega]
+		[Salmon+ahumado]
+		[Tortilla+de+patatas]
+		[Brownie]
+		[Cheesecake]
+		[Crema+catalana]
+		[Creppe]
+		[Helado+de+fresa]
+		[Tarta+de+chocolate]
+		[Trufas+de+chocolate])
 	(disponibilidad Total)
-	(info_generica Arabe)
+	(info_generica Arabe Vegetariano Clasico)
 	(ingredientes
 		[Semola]
 		[Caldo+de+carne]
@@ -170,9 +217,29 @@
 
 ([Ensalada] of  Principal
 
-	(combina_bien [Salmon+ahumado])
+	(combina_bien
+		[Salmon+ahumado]
+		[Croquetas]
+		[Falafel]
+		[Gambas+al+ajillo]
+		[Hamburguesa]
+		[Calsotada]
+		[Pizza+4+quesos]
+		[Pollo+al+Ast]
+		[Pulpo+a+la+gallega]
+		[Salmon+ahumado]
+		[Tortilla+de+patatas]
+		[Brownie]
+		[Cheesecake]
+		[Crema+catalana]
+		[Creppe]
+		[Helado+de+fresa]
+		[Mochi]
+		[Tarta+de+chocolate]
+		[Torrijas]
+		[Trufas+de+chocolate])
 	(disponibilidad Total)
-	(info_generica Vegetariano Vegano)
+	(info_generica Vegetariano Vegano Clasico)
 	(ingredientes
 		[Lechuga]
 		[Zanahoria]
@@ -186,8 +253,26 @@
 
 ([Falafel] of  Principal
 
+	(combina_bien
+		[Calsotada]
+		[Ensalada]
+		[Gambas+al+ajillo]
+		[Gazpacho]
+		[Hamburguesa]
+		[Harira]
+		[Pollo+al+Ast]
+		[Pulpo+a+la+gallega]
+		[Salmon+ahumado]
+		[Sushi]
+		[Tortilla+de+patatas]
+		[Brownie]
+		[Crema+catalana]
+		[Creppe]
+		[Mochi]
+		[Tarta+de+chocolate]
+		[Trufas+de+chocolate])
 	(disponibilidad Total)
-	(info_generica Arabe Vegano)
+	(info_generica Arabe Vegano Moderno Vegetariano Moderno)
 	(ingredientes
 		[Salsa+de+yogur]
 		[Garbanzos]
@@ -224,7 +309,7 @@
 ([Gambas+al+ajillo] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Caliente Mediterraneo)
+	(info_generica Caliente Mediterraneo Sibarita Moderno)
 	(ingredientes
 		[Ajo]
 		[Perejil]
@@ -239,7 +324,7 @@
 ([Gazpacho] of  Principal
 
 	(disponibilidad Verano)
-	(info_generica Vegetariano Frio Mediterraneo)
+	(info_generica Vegetariano Frio Mediterraneo Moderno)
 	(ingredientes
 		[Ajo]
 		[Cebolla]
@@ -254,7 +339,7 @@
 ([Hamburguesa] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Carne Caliente)
+	(info_generica Carne Caliente Mediterraneo Moderno Moderno)
 	(ingredientes
 		[Queso]
 		[Lechuga]
@@ -270,8 +355,8 @@
 
 ([Harira] of  Principal
 
-	(disponibilidad Total)
-	(info_generica Arabe Caliente Sopa Carne)
+	(disponibilidad Invierno)
+	(info_generica Arabe Caliente Sopa Carne Clasico)
 	(ingredientes
 		[Cilantro]
 		[Jengibre]
@@ -340,7 +425,7 @@
 ([Paella] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Pescado Caliente Mediterraneo)
+	(info_generica Pescado Caliente Mediterraneo Clasico Moderno)
 	(ingredientes
 		[Gambas]
 		[Arroz]
@@ -376,7 +461,7 @@
 ([Pizza+4+quesos] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Vegetariano Mediterraneo)
+	(info_generica Vegetariano Mediterraneo Clasico)
 	(ingredientes
 		[Aceite+de+oliva]
 		[Cebolla]
@@ -398,7 +483,7 @@
 ([Pollo+al+Ast] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Carne Mediterraneo)
+	(info_generica Carne Mediterraneo Clasico)
 	(ingredientes
 		[Aceite+de+oliva]
 		[Ajo]
@@ -418,7 +503,7 @@
 ([Pulpo+a+la+gallega] of  Principal
 
 	(disponibilidad Verano)
-	(info_generica Pescado Caliente Mediterraneo)
+	(info_generica Pescado Caliente Mediterraneo Sibarita Moderno)
 	(ingredientes
 		[Ajo]
 		[Cebolla]
@@ -438,7 +523,7 @@
 ([Ramen] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Carne Japones Caliente)
+	(info_generica Carne Japones Caliente Clasico Moderno)
 	(ingredientes
 		[Cebolla]
 		[Carne+picada]
@@ -462,14 +547,14 @@
 ([Salmon+ahumado] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Pescado)
+	(info_generica Pescado Japones Moderno Sibarita)
 	(ingredientes
 		[Salmon]
 		[Limon]
 		[Sal])
-	(papel Ambos)
+	(papel Segundo)
 	(precio 7.0)
-	(tiempo_coccion Alto))
+	(tiempo_coccion Medio))
 
 ([Salsa+de+soja] of  Ingrediente
 )
@@ -495,7 +580,7 @@
 ([Sopa+de+miso] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Vegano Japones Caliente Sopa)
+	(info_generica Vegano Japones Caliente Sopa Clasico Vegetariano Vegano)
 	(ingredientes
 		[Soja]
 		[Sal]
@@ -508,7 +593,7 @@
 ([Sushi] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Pescado Japones)
+	(info_generica Pescado Japones Moderno)
 	(ingredientes
 		[Arroz]
 		[Salmon]
@@ -554,12 +639,12 @@
 ([Tortilla+de+patatas] of  Principal
 
 	(disponibilidad Total)
-	(info_generica Mediterraneo)
+	(info_generica Mediterraneo Clasico Vegetariano)
 	(ingredientes
 		[Cebolla]
 		[Patatas]
 		[Huevo])
-	(papel Ambos)
+	(papel Segundo)
 	(precio 7.0)
 	(tiempo_coccion Medio))
 

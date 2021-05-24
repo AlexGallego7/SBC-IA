@@ -1215,13 +1215,13 @@
 (defrule recopilacion-datos-evento::establecer-comensales "Indica el numero de comensales"
     (not (datos-evento))
     =>
-    (bind ?r (pregunta-int "Cual es el numero de comensales?" 1 50))
+    (bind ?r (pregunta-int "Cual es el numero de comensales?" 1 200))
     (printout t crlf)
-    (if (and (>= ?r 1) (<= ?r 10)) then (bind ?tipo "Bajo"))
-    (if (and (>= ?r 11) (<= ?r 30)) then (bind ?tipo "Medio"))
-    (if (and (>= ?r 31) (<= ?r 50)) then (bind ?tipo "Alto"))
+    (if (and (>= ?r 1) (<= ?r 50)) then (bind ?tipo "Bajo"))
+    (if (and (>= ?r 51) (<= ?r 100)) then (bind ?tipo "Medio"))
+    (if (and (>= ?r 101) (<= ?r 200)) then (bind ?tipo "Alto"))
 
-    (assert (datos-evento (n_comensales ?r)))
+    (assert (datos-evento (n_comensales ?tipo)))
 )
 
 (defrule recopilacion-datos-evento::establecer-epoca "Indica la epoca"
@@ -1455,7 +1455,7 @@
 (defrule seleccion::eliminar-platos-no-vegetarianos"Elimina los platos que no son vegetarianos"
 	?d <- (datos-restricciones (dieta ?dieta))
 	?s <- (object (is-a Plato) (info_generica $?info_generica))
-	(test (eq ?dieta "Vegetariana" ))
+	(test (eq ?dieta "Vegetariana"))
     =>
 	(if (not (member$ Vegetariano $?info_generica)) then (send ?s delete))
 )
@@ -1463,10 +1463,27 @@
 (defrule seleccion::eliminar-platos-no-veganos "Elimina los platos que no son veganos"
 	?d <- (datos-restricciones (dieta ?dieta))
 	?s <- (object (is-a Plato) (info_generica $?info_generica))
-	(test (eq ?dieta "Vegana" ))
+	(test (eq ?dieta "Vegana"))
     =>
 	(if (not (member$ Vegano $?info_generica)) then (send ?s delete))
 )
+
+(defrule seleccion::tiempo-coccion-adecuado "Elimina los platos que no tengan un tiempo de coccion adecuado"
+    ?d <- (datos-evento (n_comensales ?n))
+    ?s <- (object (is-a Plato) (tiempo_coccion ?tc))
+    (test (and (eq ?n "Alto") (eq ?tc Alto)))
+    =>
+    (send ?s delete)
+)
+
+(defrule seleccion::temporada-adecuada "Elimina los platos que tengan ingredientes no disponibles"
+    ?d <- (datos-evento (epoca ?epoca))
+    ?s <- (object (is-a Plato) (disponibilidad ?disp))
+    (test (and (neq ?disp Total) (neq (sym-cat ?epoca) ?disp)))
+    =>
+    (send ?s delete)
+)
+    
 
 (defrule seleccion::seleccion-platos-por-ingredientes "Selecciona los sin ingredientes prohibidos"
 	(declare (salience -1))

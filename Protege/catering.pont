@@ -1,7 +1,7 @@
-; Mon May 24 22:58:34 CEST 2021
+; Mon May 24 23:45:09 CEST 2021
 ; 
 ;+ (version "3.5")
-;+ (build "Build 660")
+;+ (build "Build 663")
 
 
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
@@ -83,7 +83,7 @@
 	(multislot info_generica
 ;+		(comment "Información genérica del plato")
 		(type SYMBOL)
-		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterraneo Japones)
+		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterraneo Japones Clasico Moderno Sibarita)
 		(create-accessor read-write))
 	(multislot combina_bien
 ;+		(comment "Indica los platos con cuales combina bien.")
@@ -259,7 +259,7 @@
 	(multislot info_generica
 ;+		(comment "Información genérica del plato")
 		(type SYMBOL)
-		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterraneo Japones)
+		(allowed-values Pescado Carne Vegetariano Frio Caliente Arabe Vegano Sopa Pasta Mediterraneo Japones Clasico Moderno Sibarita)
 		(create-accessor read-write))
 	(single-slot precio
 ;+		(comment "Precio del plato")
