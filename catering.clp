@@ -1693,35 +1693,32 @@
 ;; 				REGLAS DEL MÓDULO "RESULTADOS"
 ;;			------
 
+
 (defrule resultados::menu-barato "Escoger el menu barato"
-    ?s <- (sugerencia-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?b) (precio ?pr))
+    ?s <- (sugerencia-menu (primero ?p) (segundo ?se) (postre ?pt) (bebida ?b) (precio ?pr))
     ?t <- (datos-restricciones (precio_min ?p_min))
     (not (primer-menu))
     =>
-    (assert (primer-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?p) (precio ?pr)))
+    (assert (primer-menu (primero ?p) (segundo ?se) (postre ?pt) (bebida ?p) (precio ?pr)))
 )
 
 (defrule resultados::menu-medio "Escoger el menu medio"    
-    ?s <- (sugerencia-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?b) (precio ?pr))
+    ?s <- (sugerencia-menu (primero ?p) (segundo ?se) (postre ?pt) (bebida ?b) (precio ?pr))
     ?t <- (datos-restricciones (precio_min ?p_min))
-    (test (not segundo-menu))
+    (not (segundo-menu))
     =>    
-    (assert (segundo-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?p) (precio ?pr)))
+    (assert (segundo-menu (primero ?p) (segundo ?se) (postre ?pt) (bebida ?p) (precio ?pr)))
 )
 
 (defrule resultados::menu-caro "Escoger el menu caro"
-    ?s <- (sugerencia-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?b) (precio ?pr))
+    ?s <- (sugerencia-menu (primero ?p) (segundo ?se) (postre ?pt) (bebida ?b) (precio ?pr))
     ?t <- (datos-restricciones (precio_min ?p_max))
-    (test (not terecero-menu))
+    (not (tercer-menu))
     =>    
-    (assert (tercero-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?p) (precio ?pr)))
+    (assert (tercero-menu (primero ?p) (segundo ?se) (postre ?pt) (bebida ?p) (precio ?pr)))
 )
 
-(defrule resultados::no-resultados "No se pueden mostrar resultados"
-    (not (primer-menu))
-    =>
-    (printout t "No se han podido generar los menus personalizados, lo sentimos." crlf)
-)
+;; No nos ha dado tiempo a escoger los menus adecuados y escoge los 3 ultimos que ha generado
 
 (defrule resultados::pasar-resultados "Pasar a la muestra de resultados"
     ?m1 <- (primer-menu (primero ?p1) (segundo ?s1) (postre ?pt1) (bebida ?b1) (precio ?pr1))
@@ -1731,10 +1728,14 @@
     (printout t "------------ MENUS OFRECIDOS -------------" crlf)
     (printout t "1. Menu barato: " crlf)
     (printout t "Primero: " ?p1 ", Segundo: " ?s1 ", Postre: " ?pt1 ", Bebida: " ?b1 ", Precio: " ?pr1 crlf)
+    (printout t crlf)
     (printout t "2. Menu medio: " crlf)
     (printout t "Primero: " ?p2 ", Segundo: " ?s2 ", Postre: " ?pt2 ", Bebida: " ?b2 ", Precio: " ?pr2 crlf)
+    (printout t crlf)
     (printout t "3. Menu caro: " crlf)
     (printout t "Primero: " ?p3 ", Segundo: " ?s3 ", Postre: " ?pt3 ", Bebida: " ?b3 ", Precio: " ?pr3 crlf)
+    (printout t crlf)
+
 )
 
 (defrule resultados::escoger-menu "Escoge menu"
