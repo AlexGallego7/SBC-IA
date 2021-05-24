@@ -1251,6 +1251,29 @@
 	
 )
 
+(deftemplate MAIN::primer-menu
+    (slot primero (type STRING) (default "None"))
+    (slot segundo (type STRING) (default "None"))
+    (slot postre (type STRING) (default "None"))
+    (slot bebida (type STRING) (default "None"))
+    (slot precio (type FLOAT) (default -1.0))
+)
+
+(deftemplate MAIN::segundo-menu
+    (slot primero (type STRING) (default "None"))
+    (slot segundo (type STRING) (default "None"))
+    (slot postre (type STRING) (default "None"))
+    (slot bebida (type STRING) (default "None"))
+    (slot precio (type FLOAT) (default -1.0))
+)
+
+(deftemplate MAIN::tercero-menu
+    (slot primero (type STRING) (default "None"))
+    (slot segundo (type STRING) (default "None"))
+    (slot postre (type STRING) (default "None"))
+    (slot bebida (type STRING) (default "None"))
+    (slot precio (type FLOAT) (default -1.0))
+)
 ;; ------------------------
 ;; FUNCIONES PARA PREGUNTAS
 ;; ------------------------
@@ -1301,9 +1324,8 @@
 	(declare (salience 10))
 	=>
   	(printout t crlf)
-	(printout t "!Bienvenido! A continuacion se le formularan una serie de" crlf)
-	(printout t "preguntas para recomendarle una serie de menus." crlf)
-	(printout t crlf)
+	(printout t "!Bienvenido a nuestra aplicacion de menus!. A continuación" crlf)
+	(printout t " se le formularan unas preguntas para ofrecerle 3 menus personalizados." crlf)
 	(focus recopilacion-datos-evento)
 )
 
@@ -1397,15 +1419,13 @@
     ?g <- (datos-menu (region ?region) (estilo ?estilo))
     (and (test (eq ?region "None")) (test (eq ?estilo "Regional")))
     =>
-    (bind ?valores (create$ "Italia" "Mediterraneo" "Arabe" "China" "Mexico"))
+    (bind ?valores (create$  "Mediterraneo" "Arabe" "Japones"))
     (bind ?r (pregunta-symbol "Que region le interesa para el menu" ?valores))
     (printout t crlf)
     
-    (if (= ?r 1) then (bind ?region "Italia"))
-    (if (= ?r 2) then (bind ?region "Mediterraneo"))
-    (if (= ?r 3) then (bind ?region "Arabe"))
-    (if (= ?r 4) then (bind ?region "China"))
-    (if (= ?r 5) then (bind ?region "Mexico"))
+    (if (= ?r 1) then (bind ?region "Mediterraneo"))
+    (if (= ?r 2) then (bind ?region "Arabe"))
+    (if (= ?r 3) then (bind ?region "Japones"))
     
     (modify ?g (region ?region))
 )
@@ -1585,26 +1605,24 @@
 
 (defrule seleccion::estilo-clasico "Elimina los platos que no tengan el estilo clasico"
     ?d <- (datos-menu (estilo ?estilo))
-    ?s <- (object (is-a Plato) (info_generica $?info_generica))
+    ?s <- (object (is-a Principal) (info_generica $?info_generica))
     (test (eq ?estilo "Clasico"))
     =>
-    (printout t $?info_generica crlf)
     (if (not (member$ Clasico $?info_generica)) then 
         (send ?s delete))
 )
 
 (defrule seleccion::estilo-moderno "Elimina los platos que no tengan el estilo moderno"
     ?d <- (datos-menu (estilo ?estilo))
-    ?s <- (object (is-a Plato) (info_generica $?info_generica))
+    ?s <- (object (is-a Principal) (info_generica $?info_generica))
     (test (eq ?estilo "Moderno"))
     =>
-    (printout t "he llegado moderno")
     (if (not (member$ Moderno $?info_generica)) then (send ?s delete))
 )
 
 (defrule seleccion::estilo-regional "Elimina los platos que no tengan el estilo regional"
     ?d <- (datos-menu (estilo ?estilo) (region ?region))
-    ?s <- (object (is-a Plato) (info_generica $?info_generica))
+    ?s <- (object (is-a Principal) (info_generica $?info_generica))
     (test (eq ?estilo "Regional"))
     =>
     (if (not (member$ (sym-cat ?region) $?info_generica)) then (send ?s delete))
@@ -1612,7 +1630,7 @@
 
 (defrule seleccion::estilo-sibarita "Elimina los platos que no tengan el estilo sibarita"
     ?d <- (datos-menu (estilo ?estilo))
-    ?s <- (object (is-a Plato) (info_generica $?info_generica))
+    ?s <- (object (is-a Principal) (info_generica $?info_generica))
     (test (eq ?estilo "Sibarita"))
     =>
     (if (not (member$ Sibarita $?info_generica)) then (send ?s delete))
@@ -1653,22 +1671,16 @@
 	?segundo <- (object (is-a Principal))
 	?postre <- (object (is-a Postre))
 	?bebida <- (object (is-a Bebida))
+	?p <- (datos-restricciones (precio_max ?p_max) (precio_min ?p_min))
 	(test (and (and (neq ?primero ?segundo) (or (eq (send ?primero get-papel) Primero) (eq (send ?primero get-papel) Ambos)))
 			 (or (eq (send ?segundo get-papel) Segundo) (eq (send ?segundo get-papel) Ambos))))
 	=> 
 	(bind ?precio (+ (+ (+ (send ?primero get-precio) (send ?segundo get-precio))(send ?postre get-precio)) (send ?bebida get-precio)))  
-	(assert (sugerencia-menu (primero ?primero) (segundo ?segundo) (postre ?postre) (bebida ?bebida) (precio ?precio)))
+	(if (and (< ?precio ?p_max) (> ?precio ?p_min)) then
+        (assert (sugerencia-menu (primero ?primero) (segundo ?segundo) (postre ?postre) (bebida ?bebida) (precio ?precio)))
+    )
 )
 
-(defrule generacion-soluciones::seleccion-platos-por-precio "Selecciona los platos dentro del rango de precio"
-	(declare (salience -1))
-    ?s <- (sugerencia-menu (precio ?precio))
-	?p <- (datos-restricciones (precio_min ?p_min) (precio_max ?p_max))
-	(test (or (> ?precio ?p_max) (< ?precio ?p_min)))
-    =>
-	(printout t "se va a eliminar esta sugerencia " ?s " debido a su precio del " ?precio crlf)
-	(retract ?s)
-)
 		
 (defrule generacion-soluciones::pasar-resultados "Pasar a la muestra de resultados"
     (declare (salience -2))
@@ -1681,8 +1693,54 @@
 ;; 				REGLAS DEL MÓDULO "RESULTADOS"
 ;;			------
 
-(defrule resultados::pasar-resultados "Pasar a la muestra de resultados"
-    ?s <- (sugerencia-menu)
+(defrule resultados::menu-barato "Escoger el menu barato"
+    ?s <- (sugerencia-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?b) (precio ?pr))
+    ?t <- (datos-restricciones (precio_min ?p_min))
+    (not (primer-menu))
     =>
+    (assert (primer-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?p) (precio ?pr)))
+)
+
+(defrule resultados::menu-medio "Escoger el menu medio"    
+    ?s <- (sugerencia-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?b) (precio ?pr))
+    ?t <- (datos-restricciones (precio_min ?p_min))
+    (test (not segundo-menu))
+    =>    
+    (assert (segundo-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?p) (precio ?pr)))
+)
+
+(defrule resultados::menu-caro "Escoger el menu caro"
+    ?s <- (sugerencia-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?b) (precio ?pr))
+    ?t <- (datos-restricciones (precio_min ?p_max))
+    (test (not terecero-menu))
+    =>    
+    (assert (tercero-menu (primero ?p) (segundo ?s) (postre ?pt) (bebida ?p) (precio ?pr)))
+)
+
+(defrule resultados::no-resultados "No se pueden mostrar resultados"
+    (not (primer-menu))
+    =>
+    (printout t "No se han podido generar los menus personalizados, lo sentimos." crlf)
+)
+
+(defrule resultados::pasar-resultados "Pasar a la muestra de resultados"
+    ?m1 <- (primer-menu (primero ?p1) (segundo ?s1) (postre ?pt1) (bebida ?b1) (precio ?pr1))
+    ?m2 <- (segundo-menu (primero ?p2) (segundo ?s2) (postre ?pt2) (bebida ?b2) (precio ?pr2))
+    ?m3 <- (tercero-menu (primero ?p3) (segundo ?s3) (postre ?pt3) (bebida ?b3) (precio ?pr3))
+    =>
+    (printout t "------------ MENUS OFRECIDOS -------------" crlf)
+    (printout t "1. Menu barato: " crlf)
+    (printout t "Primero: " ?p1 ", Segundo: " ?s1 ", Postre: " ?pt1 ", Bebida: " ?b1 ", Precio: " ?pr1 crlf)
+    (printout t "2. Menu medio: " crlf)
+    (printout t "Primero: " ?p2 ", Segundo: " ?s2 ", Postre: " ?pt2 ", Bebida: " ?b2 ", Precio: " ?pr2 crlf)
+    (printout t "3. Menu caro: " crlf)
+    (printout t "Primero: " ?p3 ", Segundo: " ?s3 ", Postre: " ?pt3 ", Bebida: " ?b3 ", Precio: " ?pr3 crlf)
+)
+
+(defrule resultados::escoger-menu "Escoge menu"
+    =>
+    (printout t "Escoja el menu que mas se adeque a su gusto (1, 2, 3)" crlf)
+    (bind ?respuesta (readline))
+    (printout t "¡Gracias por utilizar nuestro servicio!" crlf)
 )
 
